@@ -1607,7 +1607,8 @@ input[type="range"]::-webkit-slider-thumb:hover {
   </div>
 
   <!-- JavaScript Modules -->
-  <script type="module">
+  <script>
+(function(){
 const PROMO_DATA = {
   operators: [
     {
@@ -1834,8 +1835,10 @@ const PROMO_DATA = {
 };
 
 window.PROMO_DATA = PROMO_DATA;
+})();
 </script>
-<script type="module">
+<script>
+(function(){
 const PROMO_DATA = window.PROMO_DATA;
 // [Inlined data.js]
 
@@ -2306,8 +2309,10 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
   init();
 }
 
+})();
 </script>
-  <script type="module">
+  <script>
+(function(){
 const PROMO_DATA = window.PROMO_DATA;
 // [Inlined data.js]
 
@@ -2612,6 +2617,7 @@ if (document.readyState === 'interactive' || document.readyState === 'complete')
   init();
 }
 
+})();
 </script>
 </body>
 </html>

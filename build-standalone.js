@@ -43,11 +43,11 @@ try {
   const cssTag = `<style>\n${css}\n</style>`;
   html = html.replace(/<link\s+rel="stylesheet"\s+href="style\.css"\s*\/?>/g, cssTag);
 
-  // 4. Inline JavaScript scripts as separate module tags
-  console.log('📦 Inlining JavaScript scripts as scoped modules...');
-  const dataTag = `<script type="module">\n${processedData}\nwindow.PROMO_DATA = PROMO_DATA;\n</script>`;
-  const appTag = `<script type="module">\nconst PROMO_DATA = window.PROMO_DATA;\n${processedApp}\n</script>`;
-  const timelineTag = `<script type="module">\nconst PROMO_DATA = window.PROMO_DATA;\n${processedTimeline}\n</script>`;
+  // 4. Inline JavaScript scripts as separate classic script tags wrapped in IIFE closures
+  console.log('📦 Inlining JavaScript scripts with IIFE closures...');
+  const dataTag = `<script>\n(function(){\n${processedData}\nwindow.PROMO_DATA = PROMO_DATA;\n})();\n</script>`;
+  const appTag = `<script>\n(function(){\nconst PROMO_DATA = window.PROMO_DATA;\n${processedApp}\n})();\n</script>`;
+  const timelineTag = `<script>\n(function(){\nconst PROMO_DATA = window.PROMO_DATA;\n${processedTimeline}\n})();\n</script>`;
 
   // Replace script source links in HTML with the inlined modules
   html = html.replace(/<script\s+type="module"\s+src="app\.js"\s*><\/script>/g, `${dataTag}\n${appTag}`);
