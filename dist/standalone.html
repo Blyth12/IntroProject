@@ -204,6 +204,10 @@ body {
   gap: 24px;
 }
 
+.filters-card {
+  flex-grow: 1;
+}
+
 .sidebar-panel h2 {
   font-family: var(--font-display);
   font-size: 18px;
@@ -444,8 +448,6 @@ select:focus {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  max-height: 160px;
-  overflow-y: auto;
   padding-right: 4px;
 }
 
@@ -547,22 +549,25 @@ input[type="range"]::-webkit-slider-thumb:hover {
 /* --- Navigation Tabs --- */
 .dashboard-tabs {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   background: rgba(16, 24, 40, 0.3);
   padding: 6px;
   border: 1px solid var(--card-border);
   border-radius: var(--border-radius-md);
-  align-self: flex-start;
+  width: 100%;
+  margin-bottom: 24px;
 }
 
 .tab-btn {
+  flex: 1;
+  justify-content: center;
   background: transparent;
   border: none;
   color: var(--text-muted);
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 14px;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
@@ -607,6 +612,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
   color: var(--text-muted);
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .sorting-controls {
   display: flex;
   align-items: center;
@@ -623,8 +634,43 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
 .offers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+}
+
+@media (max-width: 1100px) {
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .offers-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Pagination */
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--card-border);
+}
+
+.btn-page {
+  width: auto;
+  padding: 8px 20px;
+  font-size: 14px;
+}
+
+.page-info {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 /* --- Offer Card Details --- */
@@ -780,9 +826,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 /* --- Historical Trends View --- */
+.main-layout.full-width-layout {
+  grid-template-columns: 1fr;
+}
+
 .historical-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 24px;
 }
 
@@ -878,11 +928,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   stroke: var(--primary);
   stroke-width: 3;
   cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.chart-node:hover {
-  transform: scale(1.3);
+  transition: r 0.2s ease, stroke-width 0.2s ease;
 }
 
 .chart-tooltip {
@@ -1328,6 +1374,98 @@ input[type="range"]::-webkit-slider-thumb:hover {
   }
 }
 
+/* --- Calculator Page Layout & Styles --- */
+.calculator-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .calculator-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calculator-inputs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 15px;
+}
+
+.calculator-results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.calc-result-tile {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--card-border);
+  padding: 16px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tile-lbl {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.tile-val {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.calculator-ev-box-full {
+  background: rgba(5, 213, 161, 0.05);
+  border: 1px dashed rgba(5, 213, 161, 0.35);
+  border-radius: var(--border-radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.ev-val-large {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 950;
+  color: var(--secondary);
+  text-shadow: 0 0 16px var(--secondary-glow);
+}
+
+.calc-recs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.calc-recs-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.calc-recs-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
 </style>
 </head>
 <body>
@@ -1355,66 +1493,28 @@ input[type="range"]::-webkit-slider-thumb:hover {
           <p>UK Promo Aggregator & Historical Analytics</p>
         </div>
       </div>
-      <div class="search-bar-container">
-        <svg viewBox="0 0 24 24" class="search-icon"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/></svg>
-        <input type="text" id="search-input" placeholder="Search operators or promo codes...">
-      </div>
     </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="dashboard-tabs">
+      <button class="tab-btn active" data-tab="offers">
+        <svg viewBox="0 0 24 24" class="tab-icon"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z" fill="currentColor"/></svg>
+        Current Offers
+      </button>
+      <button class="tab-btn" data-tab="calculator">
+        <svg viewBox="0 0 24 24" class="tab-icon"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-4 14h-2v-2h2v2zm0-4h-2v-2h2v2zm-4 4H9v-2h2v2zm0-4H9v-2h2v2zm4-4H9V7h6v2z" fill="currentColor"/></svg>
+        Offer Calculator
+      </button>
+      <button class="tab-btn" data-tab="timeline">
+        <svg viewBox="0 0 24 24" class="tab-icon"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+        Historical Trends
+      </button>
+    </nav>
 
     <!-- Main Layout -->
     <div class="main-layout">
-      <!-- Sidebar Panel (Filters + Calculator) -->
+      <!-- Sidebar Panel (Filters Only) -->
       <aside class="sidebar-panel">
-        <!-- Calculator Section -->
-        <section class="glass-card calculator-card">
-          <div class="card-header-with-badge">
-            <h2>Offer Calculator</h2>
-            <span class="badge badge-accent">Interactive</span>
-          </div>
-          <p class="section-desc">Estimate total welcome bonus returns based on your budget stake.</p>
-          <div class="calculator-inputs">
-            <div class="input-group">
-              <label for="budget-input">Your Budget Stake (£)</label>
-              <div class="input-with-symbol">
-                <span class="currency-symbol">£</span>
-                <input type="number" id="budget-input" min="0" value="10" placeholder="e.g. 10">
-              </div>
-            </div>
-            <div class="input-group">
-              <label for="calc-odds">Target Qualifying Odds</label>
-              <select id="calc-odds">
-                <option value="1.5">1/2 (1.5) - Low Risk</option>
-                <option value="2.0" selected>1/1 (2.0) - Standard</option>
-                <option value="3.0">2/1 (3.0) - High Risk</option>
-              </select>
-            </div>
-          </div>
-          <div class="calculator-divider"></div>
-          <div class="calculator-results">
-            <div class="result-row">
-              <span>Qualifying Cost:</span>
-              <span id="calc-total-spend" class="result-val">£10.00</span>
-            </div>
-            <div class="result-row">
-              <span>Total Bonus Value:</span>
-              <span id="calc-total-bonus" class="result-val highlight-green">£30.00</span>
-            </div>
-            <div class="result-row">
-              <span>Active Operators:</span>
-              <span id="calc-eligible-count" class="result-val">1 Operator</span>
-            </div>
-            <div class="calculator-ev-box">
-              <div class="ev-header">
-                <span>Estimated Value (EV)</span>
-                <span class="tooltip-trigger" data-tooltip="Assumes a 70% retention rate on free bets, standard for matched betting strategies.">ℹ</span>
-              </div>
-              <span id="calc-ev-estimate" class="ev-val">£21.00</span>
-            </div>
-          </div>
-          <div id="calc-recommendations" class="calc-recs">
-            <!-- Dynamic list of recommended steps -->
-          </div>
-        </section>
 
         <!-- Filters Section -->
         <section class="glass-card filters-card">
@@ -1439,17 +1539,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
 
       <!-- Main Dashboard Content -->
       <main class="dashboard-content">
-        <!-- Navigation Tabs -->
-        <nav class="dashboard-tabs">
-          <button class="tab-btn active" data-tab="offers">
-            <svg viewBox="0 0 24 24" class="tab-icon"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z" fill="currentColor"/></svg>
-            Current Offers
-          </button>
-          <button class="tab-btn" data-tab="timeline">
-            <svg viewBox="0 0 24 24" class="tab-icon"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
-            Historical Trends
-          </button>
-        </nav>
 
         <!-- Current Offers View -->
         <section id="offers-view" class="tab-view active">
@@ -1457,19 +1546,93 @@ input[type="range"]::-webkit-slider-thumb:hover {
             <div class="results-info">
               Showing <span id="results-count" class="highlight-cyan">0</span> active offers
             </div>
-            <div class="sorting-controls">
-              <label for="sort-select">Sort by:</label>
-              <select id="sort-select">
-                <option value="rating">Rating (Highest First)</option>
-                <option value="bonus-high">Bonus Value (High to Low)</option>
-                <option value="stake-low">Stake Required (Low to High)</option>
-                <option value="odds-low">Minimum Odds (Low to High)</option>
-              </select>
+            <div class="header-controls">
+              <div class="search-bar-container">
+                <svg viewBox="0 0 24 24" class="search-icon"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/></svg>
+                <input type="text" id="search-input" placeholder="Search operators or promo codes...">
+              </div>
+              <div class="sorting-controls">
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select">
+                  <option value="rating">Rating (Highest First)</option>
+                  <option value="bonus-high">Bonus Value (High to Low)</option>
+                  <option value="stake-low">Stake Required (Low to High)</option>
+                  <option value="odds-low">Minimum Odds (Low to High)</option>
+                </select>
+              </div>
             </div>
           </div>
           <!-- Offers Grid -->
           <div class="offers-grid" id="offers-container">
             <!-- Dynamic cards generated by app.js -->
+          </div>
+          <!-- Pagination -->
+          <div class="pagination-container" id="pagination-container"></div>
+        </section>
+
+        <!-- Calculator View -->
+        <section id="calculator-view" class="tab-view">
+          <div class="calculator-grid">
+            <!-- Left Side: Inputs & Summary Card -->
+            <article class="glass-card calculator-main-card">
+              <h2>Expected Value Calculator</h2>
+              <p class="section-desc">Determine your optimum signup strategy. Input your bankroll below to see matching promotions.</p>
+              
+              <div class="calculator-inputs-row">
+                <div class="input-group">
+                  <label for="budget-input">Your Budget Stake (£)</label>
+                  <div class="input-with-symbol">
+                    <span class="currency-symbol">£</span>
+                    <input type="number" id="budget-input" min="0" value="10" placeholder="e.g. 10">
+                  </div>
+                </div>
+                
+                <div class="input-group">
+                  <label for="calc-odds">Target Qualifying Odds</label>
+                  <select id="calc-odds">
+                    <option value="1.5">1/2 (1.5) - Low Risk</option>
+                    <option value="2.0" selected>1/1 (2.0) - Standard</option>
+                    <option value="3.0">2/1 (3.0) - High Risk</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="calculator-divider"></div>
+              
+              <div class="calculator-results-grid">
+                <div class="calc-result-tile">
+                  <span class="tile-lbl">Qualifying Spend</span>
+                  <span id="calc-total-spend" class="tile-val">£10.00</span>
+                </div>
+                
+                <div class="calc-result-tile">
+                  <span class="tile-lbl">Total Free Bets</span>
+                  <span id="calc-total-bonus" class="tile-val highlight-green">£30.00</span>
+                </div>
+                
+                <div class="calc-result-tile">
+                  <span class="tile-lbl">Eligible Brands</span>
+                  <span id="calc-eligible-count" class="tile-val">1 Operator</span>
+                </div>
+              </div>
+              
+              <div class="calculator-ev-box-full">
+                <div class="ev-header">
+                  <span>Estimated Net Value (EV)</span>
+                  <span class="tooltip-trigger" data-tooltip="Assumes a 70% retention rate on free bets, standard for matched betting strategies.">ℹ</span>
+                </div>
+                <span id="calc-ev-estimate" class="ev-val-large">£21.00</span>
+              </div>
+            </article>
+            
+            <!-- Right Side: Step-by-Step Recommendations Checklist -->
+            <article class="glass-card calculator-checklist-card">
+              <h2>Your Step-by-Step Betting Strategy</h2>
+              <p class="section-desc">Follow these optimized steps in order to claim the free bets and lock in profit.</p>
+              <div id="calc-recommendations" class="calc-recs-list">
+                <!-- Dynamic list of recommended steps -->
+              </div>
+            </article>
           </div>
         </section>
 
@@ -1849,7 +2012,9 @@ const state = {
   minBonus: 0,
   maxStake: 20,
   sortBy: 'rating',
-  activeTab: 'offers'
+  activeTab: 'offers',
+  currentPage: 1,
+  itemsPerPage: 9
 };
 
 // --- DOM References ---
@@ -1877,6 +2042,7 @@ const DOM = {
   // Tabs
   tabButtons: document.querySelectorAll('.tab-btn'),
   offersView: document.getElementById('offers-view'),
+  calculatorView: document.getElementById('calculator-view'),
   timelineView: document.getElementById('timeline-view'),
   
   // Modal
@@ -1926,6 +2092,7 @@ function populateFilters() {
       } else {
         state.selectedOperators = state.selectedOperators.filter(id => id !== op.id);
       }
+      state.currentPage = 1;
       renderOffers();
     });
     
@@ -1940,6 +2107,7 @@ function setupEventListeners() {
   // Search input
   DOM.searchInput.addEventListener('input', (e) => {
     state.searchQuery = e.target.value.toLowerCase().trim();
+    state.currentPage = 1;
     renderOffers();
   });
 
@@ -1947,18 +2115,21 @@ function setupEventListeners() {
   DOM.minBonusRange.addEventListener('input', (e) => {
     state.minBonus = parseInt(e.target.value, 10);
     DOM.minBonusLabel.textContent = `£${state.minBonus}`;
+    state.currentPage = 1;
     renderOffers();
   });
 
   DOM.maxStakeRange.addEventListener('input', (e) => {
     state.maxStake = parseInt(e.target.value, 10);
     DOM.maxStakeLabel.textContent = `£${state.maxStake}`;
+    state.currentPage = 1;
     renderOffers();
   });
 
   // Sort Select
   DOM.sortSelect.addEventListener('change', (e) => {
     state.sortBy = e.target.value;
+    state.currentPage = 1;
     renderOffers();
   });
 
@@ -1969,6 +2140,7 @@ function setupEventListeners() {
     state.minBonus = 0;
     state.maxStake = 20;
     state.sortBy = 'rating';
+    state.currentPage = 1;
     
     DOM.searchInput.value = '';
     DOM.minBonusRange.value = 0;
@@ -1997,12 +2169,27 @@ function setupEventListeners() {
       const tab = btn.dataset.tab;
       state.activeTab = tab;
       
+      const sidebar = document.querySelector('.sidebar-panel');
+      const mainLayout = document.querySelector('.main-layout');
+      
       if (tab === 'offers') {
         DOM.offersView.classList.add('active');
+        DOM.calculatorView.classList.remove('active');
         DOM.timelineView.classList.remove('active');
-      } else {
+        if (sidebar) sidebar.style.display = '';
+        if (mainLayout) mainLayout.classList.remove('full-width-layout');
+      } else if (tab === 'calculator') {
         DOM.offersView.classList.remove('active');
+        DOM.calculatorView.classList.add('active');
+        DOM.timelineView.classList.remove('active');
+        if (sidebar) sidebar.style.display = 'none';
+        if (mainLayout) mainLayout.classList.add('full-width-layout');
+      } else if (tab === 'timeline') {
+        DOM.offersView.classList.remove('active');
+        DOM.calculatorView.classList.remove('active');
         DOM.timelineView.classList.add('active');
+        if (sidebar) sidebar.style.display = 'none';
+        if (mainLayout) mainLayout.classList.add('full-width-layout');
         // Notify timeline module that it is visible (useful for drawing the SVG)
         window.dispatchEvent(new CustomEvent('tab-changed', { detail: 'timeline' }));
       }
@@ -2081,8 +2268,19 @@ function renderOffers() {
     return;
   }
 
+  // Pagination logic
+  const totalOffers = filtered.length;
+  const totalPages = Math.ceil(totalOffers / state.itemsPerPage);
+  
+  if (state.currentPage > totalPages && totalPages > 0) {
+    state.currentPage = totalPages;
+  }
+  
+  const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+  const pageOffers = filtered.slice(startIndex, startIndex + state.itemsPerPage);
+
   // Draw cards
-  filtered.forEach(op => {
+  pageOffers.forEach(op => {
     const offer = op.currentOffer;
     
     // Generate card element
@@ -2151,6 +2349,56 @@ function renderOffers() {
       window.open(url, '_blank');
     });
   });
+
+  renderPagination(totalPages);
+}
+
+// --- Render Pagination ---
+function renderPagination(totalPages) {
+  const container = document.getElementById('pagination-container');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  if (totalPages <= 1) return; // Hide if only 1 page
+  
+  const paginationWrapper = document.createElement('div');
+  paginationWrapper.className = 'pagination-controls';
+  
+  // Previous button
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'btn btn-secondary btn-page';
+  prevBtn.textContent = 'Previous';
+  prevBtn.disabled = state.currentPage === 1;
+  prevBtn.addEventListener('click', () => {
+    if (state.currentPage > 1) {
+      state.currentPage--;
+      renderOffers();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+  paginationWrapper.appendChild(prevBtn);
+  
+  // Page info
+  const info = document.createElement('span');
+  info.className = 'page-info';
+  info.textContent = `Page ${state.currentPage} of ${totalPages}`;
+  paginationWrapper.appendChild(info);
+  
+  // Next button
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'btn btn-secondary btn-page';
+  nextBtn.textContent = 'Next';
+  nextBtn.disabled = state.currentPage === totalPages;
+  nextBtn.addEventListener('click', () => {
+    if (state.currentPage < totalPages) {
+      state.currentPage++;
+      renderOffers();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+  paginationWrapper.appendChild(nextBtn);
+  
+  container.appendChild(paginationWrapper);
 }
 
 // --- Offer Calculator Algorithms ---
@@ -2329,19 +2577,19 @@ function init() {
   renderMarketSummary();
   populateOpFilter();
   renderTimelineFeed('all');
-  renderSvgChart();
+  renderSvgChart('all');
 
-  // Listen for filter changes on the timeline feed
+  // Listen for filter changes on both timeline feed and chart
   DOM.timelineOpFilter.addEventListener('change', (e) => {
-    renderTimelineFeed(e.target.value);
+    const val = e.target.value;
+    renderTimelineFeed(val);
+    renderSvgChart(val);
   });
 
   // Re-draw chart when the historical trends tab is opened
-  // This avoids zero-width bounding box issues when index.html renders hidden elements.
   window.addEventListener('tab-changed', (e) => {
     if (e.detail === 'timeline') {
-      // Re-draw the chart to ensure layout fits the visible container
-      renderSvgChart();
+      renderSvgChart(DOM.timelineOpFilter.value);
     }
   });
 }
@@ -2355,7 +2603,7 @@ function renderMarketSummary() {
 
 // --- Populate Brand Focus Selector ---
 function populateOpFilter() {
-  DOM.timelineOpFilter.innerHTML = '<option value="all">All Brands</option>';
+  DOM.timelineOpFilter.innerHTML = '<option value="all">All Brands (Averages)</option>';
   
   PROMO_DATA.operators.forEach(op => {
     const opt = document.createElement('option');
@@ -2365,29 +2613,80 @@ function populateOpFilter() {
   });
 }
 
+// --- Compile Historical Comparison Data Series ---
+function getHistoricalDataSeries(operatorId) {
+  const years = [2022, 2023, 2024, 2025, 2026];
+  
+  if (operatorId === 'all') {
+    return years.map(year => {
+      let totalBonus = 0;
+      let totalStake = 0;
+      let count = 0;
+      
+      PROMO_DATA.operators.forEach(op => {
+        const hist = op.historicalOffers.find(h => h.year === year);
+        if (hist) {
+          totalBonus += hist.bonusAmount;
+          totalStake += hist.minStake;
+          count++;
+        }
+      });
+      
+      const avgBonus = count > 0 ? totalBonus / count : 0;
+      const avgStake = count > 0 ? totalStake / count : 0;
+      const avgProfit = avgBonus * 0.70;
+      
+      return {
+        year,
+        bonus: avgBonus,
+        stake: avgStake,
+        profit: avgProfit,
+        description: `Average stats across all ${count} tracked operators.`
+      };
+    });
+  } else {
+    const op = PROMO_DATA.operators.find(o => o.id === operatorId);
+    if (!op) return [];
+    
+    return years.map(year => {
+      const hist = op.historicalOffers.find(h => h.year === year);
+      if (hist) {
+        return {
+          year,
+          bonus: hist.bonusAmount,
+          stake: hist.minStake,
+          profit: hist.bonusAmount * 0.70,
+          description: hist.title || `${op.name} Welcome Offer`
+        };
+      }
+      return { year, bonus: 0, stake: 0, profit: 0, description: 'No historical campaign data' };
+    });
+  }
+}
+
 // --- Render SVG Trend Chart ---
-function renderSvgChart() {
+function renderSvgChart(operatorId = 'all') {
   const container = DOM.chartContainer;
   container.innerHTML = ''; // Clear previous
 
-  const trends = PROMO_DATA.marketAnalysis.trends;
-  
+  const dataSeries = getHistoricalDataSeries(operatorId);
+  if (dataSeries.length === 0) return;
+
   // Define SVG dimensions
   const width = 560;
   const height = 220;
   const paddingLeft = 40;
   const paddingRight = 20;
-  const paddingTop = 20;
+  const paddingTop = 25;
   const paddingBottom = 30;
 
-  // Find min/max values for scaling
-  const years = trends.map(t => t.year);
+  // Grid bounds: 0 to 60 for absolute comparison of stakes vs bonuses
+  const minVal = 0;
+  const maxVal = 60;
+
+  const years = dataSeries.map(d => d.year);
   const minYear = Math.min(...years);
   const maxYear = Math.max(...years);
-  
-  const values = trends.map(t => t.averageValue);
-  const maxVal = 40; // Hardcode bounds for a cleaner look
-  const minVal = 10;
 
   // Coordinate Mapping Helpers
   const mapX = (year) => {
@@ -2397,13 +2696,12 @@ function renderSvgChart() {
 
   const mapY = (val) => {
     const ratio = (val - minVal) / (maxVal - minVal);
-    // SVG coordinates start at top left, so we invert Y
     return height - paddingBottom - ratio * (height - paddingTop - paddingBottom);
   };
 
   // Build grid lines and labels
   let gridLinesHtml = '';
-  const gridSteps = 4; // 10, 20, 30, 40
+  const gridSteps = 4; // 0, 15, 30, 45, 60
   for (let i = 0; i <= gridSteps; i++) {
     const gridVal = minVal + i * ((maxVal - minVal) / gridSteps);
     const y = mapY(gridVal);
@@ -2417,50 +2715,73 @@ function renderSvgChart() {
 
   // Draw X Axis labels
   let xAxisHtml = '';
-  trends.forEach(t => {
+  dataSeries.forEach(t => {
     const x = mapX(t.year);
     xAxisHtml += `
       <text x="${x}" y="${height - 10}" class="chart-axis-text" text-anchor="middle">${t.year}</text>
     `;
   });
 
-  // Calculate coordinates for line and area path
-  const points = trends.map(t => ({
-    x: mapX(t.year),
-    y: mapY(t.averageValue),
-    val: t.averageValue,
-    year: t.year,
-    pressure: t.regPressure,
-    desc: t.description
-  }));
+  // Compile points for each line
+  const bonusPoints = dataSeries.map(d => ({ x: mapX(d.year), y: mapY(d.bonus) }));
+  const stakePoints = dataSeries.map(d => ({ x: mapX(d.year), y: mapY(d.stake) }));
+  const profitPoints = dataSeries.map(d => ({ x: mapX(d.year), y: mapY(d.profit) }));
 
-  // Build the SVG path strings
-  let linePathD = `M ${points[0].x} ${points[0].y}`;
-  let areaPathD = `M ${points[0].x} ${points[0].y}`;
+  // Helper to build SVG path definitions
+  const buildPathD = (pts) => {
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      d += ` L ${pts[i].x} ${pts[i].y}`;
+    }
+    return d;
+  };
 
-  for (let i = 1; i < points.length; i++) {
-    linePathD += ` L ${points[i].x} ${points[i].y}`;
-    areaPathD += ` L ${points[i].x} ${points[i].y}`;
-  }
+  const buildAreaD = (pts) => {
+    let d = `M ${pts[0].x} ${pts[0].y}`;
+    for (let i = 1; i < pts.length; i++) {
+      d += ` L ${pts[i].x} ${pts[i].y}`;
+    }
+    const baseY = height - paddingBottom;
+    d += ` L ${pts[pts.length - 1].x} ${baseY} L ${pts[0].x} ${baseY} Z`;
+    return d;
+  };
 
-  // Close the area path down to the baseline
-  const baseY = height - paddingBottom;
-  areaPathD += ` L ${points[points.length - 1].x} ${baseY} L ${points[0].x} ${baseY} Z`;
+  const bonusPathD = buildPathD(bonusPoints);
+  const stakePathD = buildPathD(stakePoints);
+  const profitPathD = buildPathD(profitPoints);
+  const profitAreaD = buildAreaD(profitPoints);
 
-  // Build HTML nodes for datapoint circles
+  // Build Interactive Circles
   let nodesHtml = '';
-  points.forEach((p, idx) => {
+  dataSeries.forEach(d => {
+    const cx = mapX(d.year);
+    // Render distinct hover node circles for each coordinate
     nodesHtml += `
-      <circle 
-        cx="${p.x}" 
-        cy="${p.y}" 
-        r="6" 
-        class="chart-node" 
-        data-index="${idx}"
-        style="--primary: #00f2fe; --bg-dark: #080b11;"
-      />
+      <!-- Year Hover Zone Circle -->
+      <circle cx="${cx}" cy="${mapY(d.bonus)}" r="5" class="chart-node" data-year="${d.year}" style="--primary: #00f2fe; --bg-dark: #080b11; stroke: #00f2fe; stroke-width: 2px;" />
+      <circle cx="${cx}" cy="${mapY(d.stake)}" r="5" class="chart-node" data-year="${d.year}" style="--primary: #ff7043; --bg-dark: #080b11; stroke: #ff7043; stroke-width: 2px;" />
+      <circle cx="${cx}" cy="${mapY(d.profit)}" r="5" class="chart-node" data-year="${d.year}" style="--primary: #05d5a1; --bg-dark: #080b11; stroke: #05d5a1; stroke-width: 2px;" />
     `;
   });
+
+  // Setup Dynamic Legend Headers
+  const brandName = operatorId === 'all' ? 'All Brands (Average)' : PROMO_DATA.operators.find(o => o.id === operatorId).name;
+  const legendHtml = `
+    <div class="chart-legend-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 12px; padding: 0 10px;">
+      <h3 style="font-size: 13px; font-weight: 800; margin: 0; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; border-left: 3px solid var(--primary); padding-left: 8px;">${brandName}</h3>
+      <div style="display: flex; gap: 15px; font-size: 11px; font-weight: 700;">
+        <span style="display: flex; align-items: center; gap: 6px; color: var(--text-light);">
+          <span style="width: 10px; height: 3px; background: #00f2fe; border-radius: 1px;"></span> Welcome Bonus
+        </span>
+        <span style="display: flex; align-items: center; gap: 6px; color: var(--text-light);">
+          <span style="width: 10px; height: 3px; background: #ff7043; border-radius: 1px;"></span> Min Stake
+        </span>
+        <span style="display: flex; align-items: center; gap: 6px; color: var(--text-light);">
+          <span style="width: 10px; height: 3px; background: #05d5a1; border-radius: 1px;"></span> Expected Profit
+        </span>
+      </div>
+    </div>
+  `;
 
   // Assemble full SVG
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -2469,17 +2790,10 @@ function renderSvgChart() {
   
   svg.innerHTML = `
     <defs>
-      <!-- Line Gradient -->
-      <linearGradient id="chartGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#00f2fe" />
-        <stop offset="50%" stop-color="#05d5a1" />
-        <stop offset="100%" stop-color="#fbc02d" />
-      </linearGradient>
-      
       <!-- Area Gradient -->
-      <linearGradient id="chartAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-        <stop offset="0%" stop-color="#00f2fe" stop-opacity="0.25" />
-        <stop offset="100%" stop-color="#00f2fe" stop-opacity="0.0" />
+      <linearGradient id="profitAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#05d5a1" stop-opacity="0.12" />
+        <stop offset="100%" stop-color="#05d5a1" stop-opacity="0.0" />
       </linearGradient>
     </defs>
     
@@ -2489,16 +2803,21 @@ function renderSvgChart() {
     <!-- X Axis Years -->
     ${xAxisHtml}
     
-    <!-- Area Under Line -->
-    <path d="${areaPathD}" class="chart-area" />
+    <!-- Area Under Profit Line -->
+    <path d="${profitAreaD}" fill="url(#profitAreaGrad)" />
     
-    <!-- Trend Line -->
-    <path d="${linePathD}" class="chart-line" />
+    <!-- Line Paths -->
+    <path d="${bonusPathD}" fill="none" stroke="#00f2fe" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 2px 4px rgba(0,242,254,0.25));" />
+    <path d="${stakePathD}" fill="none" stroke="#ff7043" stroke-width="2.5" stroke-dasharray="4 3" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 2px 4px rgba(255,112,67,0.2));" />
+    <path d="${profitPathD}" fill="none" stroke="#05d5a1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter: drop-shadow(0 2px 4px rgba(5,213,161,0.25));" />
     
     <!-- Interactive Circles -->
     ${nodesHtml}
   `;
 
+  const legendDiv = document.createElement('div');
+  legendDiv.innerHTML = legendHtml;
+  container.appendChild(legendDiv);
   container.appendChild(svg);
 
   // Setup dynamic chart tooltips
@@ -2509,28 +2828,50 @@ function renderSvgChart() {
   const circles = svg.querySelectorAll('.chart-node');
   circles.forEach(circle => {
     circle.addEventListener('mouseenter', (e) => {
-      const idx = parseInt(e.target.dataset.index, 10);
-      const pt = points[idx];
+      const year = parseInt(e.target.dataset.year, 10);
+      const pt = dataSeries.find(d => d.year === year);
+      if (!pt) return;
+
+      // Expand all nodes for this year on hover
+      svg.querySelectorAll(`.chart-node[data-year="${year}"]`).forEach(node => {
+        node.setAttribute('r', '7');
+      });
 
       tooltip.innerHTML = `
-        <div style="font-weight: 700; color: var(--primary); margin-bottom: 2px;">Year: ${pt.year}</div>
-        <div style="font-size: 13px; font-weight: 800; margin-bottom: 4px;">Avg Bonus: £${pt.val.toFixed(2)}</div>
-        <div style="color: var(--text-muted); font-size: 10px; margin-bottom: 4px;">Regulation: <span style="color: ${pt.pressure === 'Low' ? 'var(--secondary)' : pt.pressure === 'Medium' ? 'var(--accent-gold)' : 'var(--danger)'}; font-weight: 700">${pt.pressure}</span></div>
-        <div style="max-width: 180px; font-size: 10px; line-height: 1.3; color: var(--text-dim); border-top: 1px solid var(--card-border); padding-top: 4px;">${pt.desc}</div>
+        <div style="font-weight: 700; color: var(--text-light); margin-bottom: 6px; font-size: 11px; border-bottom: 1px solid var(--card-border); padding-bottom: 4px;">Year: ${pt.year}</div>
+        <div style="display: flex; justify-content: space-between; gap: 15px; font-size: 11px; margin-bottom: 3px; font-weight: 600;">
+          <span style="color: #00f2fe;">● Welcome Bonus:</span>
+          <span style="color: var(--text-light)">£${pt.bonus.toFixed(2)}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 15px; font-size: 11px; margin-bottom: 3px; font-weight: 600;">
+          <span style="color: #ff7043;">● Min Stake:</span>
+          <span style="color: var(--text-light)">£${pt.stake.toFixed(2)}</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; gap: 15px; font-size: 11px; margin-bottom: 6px; font-weight: 600;">
+          <span style="color: #05d5a1;">● Expected Profit:</span>
+          <span style="color: var(--text-light)">£${pt.profit.toFixed(2)}</span>
+        </div>
+        <div style="max-width: 200px; font-size: 10px; line-height: 1.35; color: var(--text-muted); border-top: 1px dashed var(--card-border); padding-top: 5px;">
+          ${pt.description}
+        </div>
       `;
 
       // Position tooltip relative to container
       const rect = e.target.getBoundingClientRect();
       const containerRect = container.getBoundingClientRect();
       const left = rect.left - containerRect.left + rect.width / 2;
-      const top = rect.top - containerRect.top;
+      const top = rect.top - containerRect.top - 15;
 
       tooltip.style.left = `${left}px`;
       tooltip.style.top = `${top}px`;
       tooltip.style.opacity = '1';
     });
 
-    circle.addEventListener('mouseleave', () => {
+    circle.addEventListener('mouseleave', (e) => {
+      const year = parseInt(e.target.dataset.year, 10);
+      svg.querySelectorAll(`.chart-node[data-year="${year}"]`).forEach(node => {
+        node.setAttribute('r', '5');
+      });
       tooltip.style.opacity = '0';
     });
   });

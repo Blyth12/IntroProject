@@ -7,7 +7,9 @@ const state = {
   minBonus: 0,
   maxStake: 20,
   sortBy: 'rating',
-  activeTab: 'offers'
+  activeTab: 'offers',
+  currentPage: 1,
+  itemsPerPage: 9
 };
 
 // --- DOM References ---
@@ -35,6 +37,7 @@ const DOM = {
   // Tabs
   tabButtons: document.querySelectorAll('.tab-btn'),
   offersView: document.getElementById('offers-view'),
+  calculatorView: document.getElementById('calculator-view'),
   timelineView: document.getElementById('timeline-view'),
   
   // Modal
@@ -84,6 +87,7 @@ function populateFilters() {
       } else {
         state.selectedOperators = state.selectedOperators.filter(id => id !== op.id);
       }
+      state.currentPage = 1;
       renderOffers();
     });
     
@@ -98,6 +102,7 @@ function setupEventListeners() {
   // Search input
   DOM.searchInput.addEventListener('input', (e) => {
     state.searchQuery = e.target.value.toLowerCase().trim();
+    state.currentPage = 1;
     renderOffers();
   });
 
@@ -105,18 +110,21 @@ function setupEventListeners() {
   DOM.minBonusRange.addEventListener('input', (e) => {
     state.minBonus = parseInt(e.target.value, 10);
     DOM.minBonusLabel.textContent = `£${state.minBonus}`;
+    state.currentPage = 1;
     renderOffers();
   });
 
   DOM.maxStakeRange.addEventListener('input', (e) => {
     state.maxStake = parseInt(e.target.value, 10);
     DOM.maxStakeLabel.textContent = `£${state.maxStake}`;
+    state.currentPage = 1;
     renderOffers();
   });
 
   // Sort Select
   DOM.sortSelect.addEventListener('change', (e) => {
     state.sortBy = e.target.value;
+    state.currentPage = 1;
     renderOffers();
   });
 
@@ -127,6 +135,7 @@ function setupEventListeners() {
     state.minBonus = 0;
     state.maxStake = 20;
     state.sortBy = 'rating';
+    state.currentPage = 1;
     
     DOM.searchInput.value = '';
     DOM.minBonusRange.value = 0;
@@ -155,12 +164,27 @@ function setupEventListeners() {
       const tab = btn.dataset.tab;
       state.activeTab = tab;
       
+      const sidebar = document.querySelector('.sidebar-panel');
+      const mainLayout = document.querySelector('.main-layout');
+      
       if (tab === 'offers') {
         DOM.offersView.classList.add('active');
+        DOM.calculatorView.classList.remove('active');
         DOM.timelineView.classList.remove('active');
-      } else {
+        if (sidebar) sidebar.style.display = '';
+        if (mainLayout) mainLayout.classList.remove('full-width-layout');
+      } else if (tab === 'calculator') {
         DOM.offersView.classList.remove('active');
+        DOM.calculatorView.classList.add('active');
+        DOM.timelineView.classList.remove('active');
+        if (sidebar) sidebar.style.display = 'none';
+        if (mainLayout) mainLayout.classList.add('full-width-layout');
+      } else if (tab === 'timeline') {
+        DOM.offersView.classList.remove('active');
+        DOM.calculatorView.classList.remove('active');
         DOM.timelineView.classList.add('active');
+        if (sidebar) sidebar.style.display = 'none';
+        if (mainLayout) mainLayout.classList.add('full-width-layout');
         // Notify timeline module that it is visible (useful for drawing the SVG)
         window.dispatchEvent(new CustomEvent('tab-changed', { detail: 'timeline' }));
       }
@@ -239,8 +263,19 @@ function renderOffers() {
     return;
   }
 
+  // Pagination logic
+  const totalOffers = filtered.length;
+  const totalPages = Math.ceil(totalOffers / state.itemsPerPage);
+  
+  if (state.currentPage > totalPages && totalPages > 0) {
+    state.currentPage = totalPages;
+  }
+  
+  const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+  const pageOffers = filtered.slice(startIndex, startIndex + state.itemsPerPage);
+
   // Draw cards
-  filtered.forEach(op => {
+  pageOffers.forEach(op => {
     const offer = op.currentOffer;
     
     // Generate card element
@@ -309,6 +344,56 @@ function renderOffers() {
       window.open(url, '_blank');
     });
   });
+
+  renderPagination(totalPages);
+}
+
+// --- Render Pagination ---
+function renderPagination(totalPages) {
+  const container = document.getElementById('pagination-container');
+  if (!container) return;
+  container.innerHTML = '';
+  
+  if (totalPages <= 1) return; // Hide if only 1 page
+  
+  const paginationWrapper = document.createElement('div');
+  paginationWrapper.className = 'pagination-controls';
+  
+  // Previous button
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'btn btn-secondary btn-page';
+  prevBtn.textContent = 'Previous';
+  prevBtn.disabled = state.currentPage === 1;
+  prevBtn.addEventListener('click', () => {
+    if (state.currentPage > 1) {
+      state.currentPage--;
+      renderOffers();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+  paginationWrapper.appendChild(prevBtn);
+  
+  // Page info
+  const info = document.createElement('span');
+  info.className = 'page-info';
+  info.textContent = `Page ${state.currentPage} of ${totalPages}`;
+  paginationWrapper.appendChild(info);
+  
+  // Next button
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'btn btn-secondary btn-page';
+  nextBtn.textContent = 'Next';
+  nextBtn.disabled = state.currentPage === totalPages;
+  nextBtn.addEventListener('click', () => {
+    if (state.currentPage < totalPages) {
+      state.currentPage++;
+      renderOffers();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+  paginationWrapper.appendChild(nextBtn);
+  
+  container.appendChild(paginationWrapper);
 }
 
 // --- Offer Calculator Algorithms ---
