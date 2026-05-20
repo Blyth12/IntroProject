@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BetTracker Pro | Gambling Sign-Up Promotions & History</title>
+  <meta name="description" content="Aggregate, compare, and track welcome offers and sign-up bonuses from top UK betting operators with real-time value calculation.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- App Glow Effects -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-logo">
+        <svg viewBox="0 0 100 100" class="logo-icon">
+          <circle cx="50" cy="50" r="46" fill="url(#logoGrad)" stroke="#00f2fe" stroke-width="2"/>
+          <path d="M30 65 L45 35 L55 55 L70 30" fill="none" stroke="#00f2fe" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="70" cy="30" r="4" fill="#05d5a1"/>
+          <defs>
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0a1324" />
+              <stop offset="100%" stop-color="#141c2d" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="logo-text">
+          <h1>BetTracker <span>Pro</span></h1>
+          <p>UK Promo Aggregator & Historical Analytics</p>
+        </div>
+      </div>
+      <div class="search-bar-container">
+        <svg viewBox="0 0 24 24" class="search-icon"><path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="currentColor"/></svg>
+        <input type="text" id="search-input" placeholder="Search operators or promo codes...">
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="main-layout">
+      <!-- Sidebar Panel (Filters + Calculator) -->
+      <aside class="sidebar-panel">
+        <!-- Calculator Section -->
+        <section class="glass-card calculator-card">
+          <div class="card-header-with-badge">
+            <h2>Offer Calculator</h2>
+            <span class="badge badge-accent">Interactive</span>
+          </div>
+          <p class="section-desc">Estimate total welcome bonus returns based on your budget stake.</p>
+          <div class="calculator-inputs">
+            <div class="input-group">
+              <label for="budget-input">Your Budget Stake (£)</label>
+              <div class="input-with-symbol">
+                <span class="currency-symbol">£</span>
+                <input type="number" id="budget-input" min="0" value="10" placeholder="e.g. 10">
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="calc-odds">Target Qualifying Odds</label>
+              <select id="calc-odds">
+                <option value="1.5">1/2 (1.5) - Low Risk</option>
+                <option value="2.0" selected>1/1 (2.0) - Standard</option>
+                <option value="3.0">2/1 (3.0) - High Risk</option>
+              </select>
+            </div>
+          </div>
+          <div class="calculator-divider"></div>
+          <div class="calculator-results">
+            <div class="result-row">
+              <span>Qualifying Cost:</span>
+              <span id="calc-total-spend" class="result-val">£10.00</span>
+            </div>
+            <div class="result-row">
+              <span>Total Bonus Value:</span>
+              <span id="calc-total-bonus" class="result-val highlight-green">£30.00</span>
+            </div>
+            <div class="result-row">
+              <span>Active Operators:</span>
+              <span id="calc-eligible-count" class="result-val">1 Operator</span>
+            </div>
+            <div class="calculator-ev-box">
+              <div class="ev-header">
+                <span>Estimated Value (EV)</span>
+                <span class="tooltip-trigger" data-tooltip="Assumes a 70% retention rate on free bets, standard for matched betting strategies.">ℹ</span>
+              </div>
+              <span id="calc-ev-estimate" class="ev-val">£21.00</span>
+            </div>
+          </div>
+          <div id="calc-recommendations" class="calc-recs">
+            <!-- Dynamic list of recommended steps -->
+          </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="glass-card filters-card">
+          <h2>Filter Offers</h2>
+          <div class="filter-group">
+            <label>Operators</label>
+            <div class="checkbox-list" id="operator-checkboxes">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+          <div class="filter-group">
+            <label for="min-bonus-range">Min Bonus Value: <span id="min-bonus-label">£0</span></label>
+            <input type="range" id="min-bonus-range" min="0" max="50" step="5" value="0">
+          </div>
+          <div class="filter-group">
+            <label for="max-stake-range">Max Qualifying Stake: <span id="max-stake-label">£20</span></label>
+            <input type="range" id="max-stake-range" min="0" max="20" step="1" value="20">
+          </div>
+          <button id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
+        </section>
+      </aside>
+
+      <!-- Main Dashboard Content -->
+      <main class="dashboard-content">
+        <!-- Navigation Tabs -->
+        <nav class="dashboard-tabs">
+          <button class="tab-btn active" data-tab="offers">
+            <svg viewBox="0 0 24 24" class="tab-icon"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2zm0 8H7v-2h10v2z" fill="currentColor"/></svg>
+            Current Offers
+          </button>
+          <button class="tab-btn" data-tab="timeline">
+            <svg viewBox="0 0 24 24" class="tab-icon"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" fill="currentColor"/></svg>
+            Historical Trends
+          </button>
+        </nav>
+
+        <!-- Current Offers View -->
+        <section id="offers-view" class="tab-view active">
+          <div class="view-header">
+            <div class="results-info">
+              Showing <span id="results-count" class="highlight-cyan">0</span> active offers
+            </div>
+            <div class="sorting-controls">
+              <label for="sort-select">Sort by:</label>
+              <select id="sort-select">
+                <option value="rating">Rating (Highest First)</option>
+                <option value="bonus-high">Bonus Value (High to Low)</option>
+                <option value="stake-low">Stake Required (Low to High)</option>
+                <option value="odds-low">Minimum Odds (Low to High)</option>
+              </select>
+            </div>
+          </div>
+          <!-- Offers Grid -->
+          <div class="offers-grid" id="offers-container">
+            <!-- Dynamic cards generated by app.js -->
+          </div>
+        </section>
+
+        <!-- Historical View -->
+        <section id="timeline-view" class="tab-view">
+          <div class="historical-grid">
+            <!-- Market Overview Analysis -->
+            <article class="glass-card analysis-card">
+              <h2>UK Gambling Bonus Market Analysis</h2>
+              <div class="analysis-content">
+                <p id="market-analysis-text"></p>
+                <div class="key-takeaways">
+                  <div class="takeaway-item">
+                    <span class="takeaway-dot green"></span>
+                    <div>
+                      <strong>The £30 Threshold:</strong> The UK market has coalesced around the £30 free bet value, which provides the optimal customer acquisition cost under current UK Gambling Commission rules.
+                    </div>
+                  </div>
+                  <div class="takeaway-item">
+                    <span class="takeaway-dot blue"></span>
+                    <div>
+                      <strong>Shift to Low Barriers:</strong> To cater to casual bettors, operators have lowered stakes. Sky Bet, Coral, and Ladbrokes now lead with £5 or any-value entry stakes.
+                    </div>
+                  </div>
+                  <div class="takeaway-item">
+                    <span class="takeaway-dot red"></span>
+                    <div>
+                      <strong>Wagering Extermination:</strong> Almost all major UK sportsbooks have abandoned wagering requirements on welcome free bet winnings, paying out returns directly in cash (minus the free bet token stake).
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Line Chart Section -->
+            <article class="glass-card chart-card">
+              <h2>Historical Value Trends (2022 - 2026)</h2>
+              <p class="section-desc">Average welcome bonus values across tracking operators in £ GBP.</p>
+              <div class="chart-container" id="chart-container">
+                <!-- SVG Chart will be injected here -->
+              </div>
+            </article>
+
+            <!-- Operators Timeline List -->
+            <article class="glass-card timeline-feed-card">
+              <h2>Operator-Specific Changes</h2>
+              <p class="section-desc">Trace the evolution of signup packages for each major betting brand.</p>
+              <div class="operator-selector-wrapper">
+                <label for="timeline-op-filter">Focus Brand:</label>
+                <select id="timeline-op-filter">
+                  <option value="all">All Brands</option>
+                  <!-- Dynamically populated -->
+                </select>
+              </div>
+              <div class="timeline-feed" id="timeline-feed-container">
+                <!-- Dynamic timeline nodes from timeline.js -->
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>&copy; 2026 BetTracker Pro. Aggregated data is for demonstration and research purposes only.</p>
+      <p class="begambleaware">18+ | Always check official terms on the operator's site before signing up. BegambleAware.org | Please gamble responsibly.</p>
+    </footer>
+  </div>
+
+  <!-- Terms & Conditions Detail Modal -->
+  <div class="modal-backdrop" id="terms-modal">
+    <div class="modal-content glass-card">
+      <button class="modal-close-btn" id="modal-close-btn">&times;</button>
+      <div class="modal-header">
+        <div id="modal-operator-logo" class="modal-logo-container"></div>
+        <div>
+          <h2 id="modal-operator-name">Operator Details</h2>
+          <p id="modal-offer-title">Welcome Offer Detail</p>
+        </div>
+      </div>
+      <div class="modal-body">
+        <!-- Quick stats -->
+        <div class="modal-quick-stats">
+          <div class="stat-box">
+            <span class="stat-lbl">Bonus Value</span>
+            <span class="stat-val highlight-green" id="modal-stat-bonus">£30</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-lbl">Min Stake</span>
+            <span class="stat-val" id="modal-stat-stake">£10</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-lbl">Min Odds</span>
+            <span class="stat-val" id="modal-stat-odds">2.0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-lbl">Expiry</span>
+            <span class="stat-val" id="modal-stat-expiry">7 Days</span>
+          </div>
+        </div>
+
+        <div class="modal-section">
+          <h3>How to Claim</h3>
+          <ol class="step-list" id="modal-steps-list">
+            <!-- JavaScript injected -->
+          </ol>
+        </div>
+
+        <div class="modal-section-grid">
+          <div class="modal-section">
+            <h3>Payment Restrictions</h3>
+            <p class="section-desc">Deposits via these methods will NOT trigger the bonus:</p>
+            <div class="exclusions-list" id="modal-exclusions-list">
+              <!-- JavaScript injected -->
+            </div>
+          </div>
+          <div class="modal-section">
+            <h3>Wagering & Terms</h3>
+            <p class="modal-terms-detail" id="modal-terms-text">Detailed terms here...</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="promo-code-display">
+          <span class="promo-lbl">Promo Code:</span>
+          <div class="code-box">
+            <code id="modal-promo-code">BETGET30</code>
+            <button class="btn-copy" id="modal-copy-btn">Copy</button>
+          </div>
+        </div>
+        <a href="#" target="_blank" class="btn btn-primary" id="modal-visit-btn">Visit Operator Website</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script type="module" src="app.js"></script>
+  <script type="module" src="timeline.js"></script>
+</body>
+</html>

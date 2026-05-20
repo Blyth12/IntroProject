@@ -1,0 +1,18 @@
+{
+  "name": "gambling-promos-tracker",
+  "version": "1.0.0",
+  "description": "Aggregator and historical tracker for UK gambling promotional offers",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "compile": "node build-standalone.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
+}
