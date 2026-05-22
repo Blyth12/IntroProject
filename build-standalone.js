@@ -6,7 +6,7 @@ const projectDir = __dirname;
 const distDir = path.join(projectDir, 'dist');
 const htmlPath = path.join(projectDir, 'index.html');
 const cssPath = path.join(projectDir, 'style.css');
-const dataPath = path.join(projectDir, 'data.js');
+const snapshotPath = path.join(projectDir, 'data', 'snapshot.json');
 const appPath = path.join(projectDir, 'app.js');
 const timelinePath = path.join(projectDir, 'timeline.js');
 const outputPath = path.join(distDir, 'standalone.html');
@@ -24,15 +24,23 @@ try {
   console.log('📖 Reading source files...');
   let html = fs.readFileSync(htmlPath, 'utf8');
   const css = fs.readFileSync(cssPath, 'utf8');
-  const dataJs = fs.readFileSync(dataPath, 'utf8');
+  
+  // Fallback to data.js if snapshot.json hasn't been generated yet
+  let snapshotJson;
+  if (fs.existsSync(snapshotPath)) {
+    snapshotJson = fs.readFileSync(snapshotPath, 'utf8');
+  } else {
+    console.warn('⚠️ No snapshot.json found! Generating a mock fallback from data.js...');
+    const rawData = fs.readFileSync(path.join(projectDir, 'data.js'), 'utf8');
+    const mockData = rawData.replace('export const PROMO_DATA = ', '');
+    snapshotJson = mockData.replace(/;\s*$/, ''); // Remove trailing semicolon
+  }
+  
   const appJs = fs.readFileSync(appPath, 'utf8');
   const timelineJs = fs.readFileSync(timelinePath, 'utf8');
 
   // 2. Process JavaScript code
   console.log('⚙️ Processing and combining JavaScript modules...');
-  
-  // Strip "export " from dataJs
-  let processedData = dataJs.replace(/export\s+const\s+PROMO_DATA/g, 'const PROMO_DATA');
   
   // Strip "import { PROMO_DATA } from './data.js';" from appJs and timelineJs
   let processedApp = appJs.replace(/import\s+\{\s*PROMO_DATA\s*\}\s*from\s*['"]\.\/data\.js['"];?/g, '// [Inlined data.js]');
@@ -45,7 +53,7 @@ try {
 
   // 4. Inline JavaScript scripts as separate classic script tags wrapped in IIFE closures
   console.log('📦 Inlining JavaScript scripts with IIFE closures...');
-  const dataTag = `<script>\n(function(){\n${processedData}\nwindow.PROMO_DATA = PROMO_DATA;\n})();\n</script>`;
+  const dataTag = `<script>\nwindow.PROMO_DATA = ${snapshotJson};\n</script>`;
   const appTag = `<script>\n(function(){\nconst PROMO_DATA = window.PROMO_DATA;\n${processedApp}\n})();\n</script>`;
   const timelineTag = `<script>\n(function(){\nconst PROMO_DATA = window.PROMO_DATA;\n${processedTimeline}\n})();\n</script>`;
 

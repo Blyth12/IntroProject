@@ -191,9 +191,7 @@ body {
   gap: 24px;
 }
 
-.filters-card {
-  flex-grow: 1;
-}
+
 
 .sidebar-panel h2 {
   font-family: var(--font-display);

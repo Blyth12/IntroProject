@@ -5,14 +5,19 @@
   "main": "index.html",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/scraper.js && node build-standalone.js",
     "preview": "vite preview",
-    "compile": "node build-standalone.js"
+    "compile": "node build-standalone.js",
+    "scrape": "node scripts/scraper.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "node-fetch": "^3.3.2"
   }
 }
