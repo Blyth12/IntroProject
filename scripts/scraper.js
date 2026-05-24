@@ -20,6 +20,13 @@ async function runScraper() {
   const getStaticData = new Function(dataContent);
   const PROMO_DATA = getStaticData();
 
+  // Wipe all sample data from memory so only successfully scraped data is shown!
+  PROMO_DATA.operators.forEach(op => {
+    op.currentOffer.title = "No Live Data Found (Scrape Failed)";
+    op.currentOffer.bonusAmount = 0;
+    op.currentOffer.minStake = 0;
+  });
+
   try {
     console.log("📥 Fetching WhichBookie data...");
     const res = await fetch('https://www.whichbookie.co.uk/free-bets/');
