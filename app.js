@@ -428,6 +428,18 @@ function calculateBudgetPotential() {
     return a.currentOffer.minStake - b.currentOffer.minStake;
   });
 
+  let cumulativeSpend = 0;
+  let selectedForBudget = [];
+  
+  for (let op of eligibleOperators) {
+    if (cumulativeSpend + op.currentOffer.minStake <= budget) {
+      cumulativeSpend += op.currentOffer.minStake;
+      selectedForBudget.push(op);
+    }
+  }
+  
+  eligibleOperators = selectedForBudget;
+
   let totalSpend = 0;
   let totalBonus = 0;
   
