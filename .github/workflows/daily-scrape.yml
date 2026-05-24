@@ -1,0 +1,14 @@
+name: Daily Vercel Scraper
+
+on:
+  schedule:
+    # Runs at 06:00 UTC every day
+    - cron: '0 6 * * *'
+  workflow_dispatch: # Allows you to manually trigger it from the GitHub Actions tab!
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Rebuild
+        run: curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK }}

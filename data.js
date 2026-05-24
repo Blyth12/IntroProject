@@ -209,6 +209,46 @@ export const PROMO_DATA = {
         { year: 2025, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" },
         { year: 2026, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" }
       ]
+    },
+    {
+      id: "betfred",
+      name: "Betfred",
+      themeColor: "#003366",
+      logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><rect width="92" height="92" rx="10" x="4" y="4" fill="#003366"/><text x="50" y="55" font-family="'Outfit', sans-serif" font-weight="900" font-size="20" fill="#ffffff" text-anchor="middle">BETFRED</text></svg>`,
+      currentOffer: { title: "Sample", type: "free-bet", minDeposit: 10, minStake: 10, minOdds: 1.5, bonusAmount: 30, bonusType: "Free Bets", promoCode: "None", wageringRequirements: "None", expiryDays: 7, depositExclusions: [], steps: [], terms: "", url: "", rating: 4.5 },
+      historicalOffers: []
+    },
+    {
+      id: "williamhill",
+      name: "William Hill",
+      themeColor: "#000055",
+      logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><rect width="92" height="92" rx="10" x="4" y="4" fill="#000055"/><text x="50" y="55" font-family="'Outfit', sans-serif" font-weight="900" font-size="14" fill="#ffffff" text-anchor="middle">William Hill</text></svg>`,
+      currentOffer: { title: "Sample", type: "free-bet", minDeposit: 10, minStake: 10, minOdds: 1.5, bonusAmount: 30, bonusType: "Free Bets", promoCode: "None", wageringRequirements: "None", expiryDays: 7, depositExclusions: [], steps: [], terms: "", url: "", rating: 4.4 },
+      historicalOffers: []
+    },
+    {
+      id: "betvictor",
+      name: "BetVictor",
+      themeColor: "#0a264a",
+      logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><rect width="92" height="92" rx="10" x="4" y="4" fill="#0a264a"/><text x="50" y="55" font-family="'Outfit', sans-serif" font-weight="900" font-size="16" fill="#ffffff" text-anchor="middle">BetVictor</text></svg>`,
+      currentOffer: { title: "Sample", type: "free-bet", minDeposit: 10, minStake: 10, minOdds: 1.5, bonusAmount: 30, bonusType: "Free Bets", promoCode: "None", wageringRequirements: "None", expiryDays: 7, depositExclusions: [], steps: [], terms: "", url: "", rating: 4.2 },
+      historicalOffers: []
+    },
+    {
+      id: "unibet",
+      name: "Unibet",
+      themeColor: "#006633",
+      logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><circle cx="50" cy="50" r="46" fill="#006633" stroke="#ffffff" stroke-width="3"/><text x="50" y="55" font-family="'Outfit', sans-serif" font-weight="900" font-size="18" fill="#ffffff" text-anchor="middle">UNIBET</text></svg>`,
+      currentOffer: { title: "Sample", type: "free-bet", minDeposit: 10, minStake: 10, minOdds: 1.5, bonusAmount: 30, bonusType: "Free Bets", promoCode: "None", wageringRequirements: "None", expiryDays: 7, depositExclusions: [], steps: [], terms: "", url: "", rating: 4.3 },
+      historicalOffers: []
+    },
+    {
+      id: "888sport",
+      name: "888sport",
+      themeColor: "#ff6600",
+      logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><rect width="92" height="92" rx="10" x="4" y="4" fill="#ff6600"/><text x="50" y="55" font-family="'Outfit', sans-serif" font-weight="900" font-size="20" fill="#000000" text-anchor="middle">888</text></svg>`,
+      currentOffer: { title: "Sample", type: "free-bet", minDeposit: 10, minStake: 10, minOdds: 1.5, bonusAmount: 30, bonusType: "Free Bets", promoCode: "None", wageringRequirements: "None", expiryDays: 7, depositExclusions: [], steps: [], terms: "", url: "", rating: 4.1 },
+      historicalOffers: []
     }
   ],
   marketAnalysis: {
