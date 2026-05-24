@@ -9,7 +9,7 @@ const cssPath = path.join(projectDir, 'style.css');
 const snapshotPath = path.join(projectDir, 'data', 'snapshot.json');
 const appPath = path.join(projectDir, 'app.js');
 const timelinePath = path.join(projectDir, 'timeline.js');
-const outputPath = path.join(distDir, 'standalone.html');
+const outputPath = path.join(distDir, 'index.html');
 
 console.log('🚀 Starting standalone HTML compiler...');
 
@@ -68,7 +68,7 @@ try {
   // Size validation
   const stats = fs.statSync(outputPath);
   const sizeKb = (stats.size / 1024).toFixed(2);
-  console.log(`✅ Compilation successful! Created [dist/standalone.html] (${sizeKb} KB)`);
+  console.log(`✅ Compilation successful! Created [dist/index.html] (${sizeKb} KB)`);
   
 } catch (error) {
   console.error('❌ Compilation failed:', error);
