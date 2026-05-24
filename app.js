@@ -1,5 +1,7 @@
 import { PROMO_DATA } from './data.js';
 
+// Dynamically hide any operators that failed the daily scrape
+PROMO_DATA.operators = PROMO_DATA.operators.filter(op => op.currentOffer.bonusAmount > 0 && !op.currentOffer.title.includes("No Live Data Found"));
 // --- Application State ---
 const state = {
   searchQuery: '',

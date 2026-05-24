@@ -33,30 +33,32 @@ async function runScraper() {
     const html = await res.text();
     const $ = cheerio.load(html);
     
-    // Extract live strings
-    let liveTexts = [];
+    // Extract live strings with HTML context
+    let scrapedOffers = [];
     $('*').each((i, el) => {
-      const text = $(el).clone().children().remove().end().text().replace(/\s+/g, ' ').trim();
-      if (text.match(/Bet £\d+.*?Get £\d+/i) || text.match(/Get £\d+.*?Free Bet/i)) {
-        if (text.length < 150) {
-          liveTexts.push(text);
+      const directText = $(el).clone().children().remove().end().text().replace(/\s+/g, ' ').trim();
+      if (directText.match(/Bet £\d+.*?Get £\d+/i) || directText.match(/Get £\d+.*?Free Bet/i)) {
+        if (directText.length < 150) {
+           // Climb up exactly 3 nodes to capture the individual operator's card wrapper
+           const contextText = $(el).parent().parent().parent().text().replace(/\s+/g, ' ').toLowerCase();
+           scrapedOffers.push({ offerText: directText, contextText: contextText });
         }
       }
     });
     
-    // Deduplicate
-    liveTexts = [...new Set(liveTexts)];
-    console.log(`✅ Found ${liveTexts.length} potential offer strings.`);
+    console.log(`✅ Found ${scrapedOffers.length} potential offer nodes in DOM.`);
     
-    // Apply live data to our operators
-    // Since WhichBookie strings aren't perfectly mapped to our static operators by ID without complex NLP, 
-    // we'll simulate the mapping by securely applying the parsed values chronologically or randomly to test.
-    PROMO_DATA.operators.forEach((op, idx) => {
-      if (liveTexts[idx]) {
-        const liveString = liveTexts[idx];
+    // Apply live data by contextual mapping
+    PROMO_DATA.operators.forEach((op) => {
+      // Normalize name to catch "WilliamHill" vs "William Hill"
+      const normalizedOpName = op.name.toLowerCase().replace(/\s+/g, '');
+      const match = scrapedOffers.find(so => so.contextText.replace(/\s+/g, '').includes(normalizedOpName));
+      
+      if (match) {
+        const liveString = match.offerText;
         const parsed = parseOfferString(liveString);
         
-        console.log(`[${op.name}] Updated: "${parsed.title}" -> Stake: £${parsed.stake}, Bonus: £${parsed.bonus}`);
+        console.log(`[${op.name}] Explicitly Matched: "${parsed.title}" -> Stake: £${parsed.stake}, Bonus: £${parsed.bonus}`);
         
         // Update current offer with live data
         op.currentOffer.title = parsed.title;
