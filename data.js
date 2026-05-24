@@ -6,12 +6,12 @@ export const PROMO_DATA = {
       themeColor: "#00f2fe",
       logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><circle cx="50" cy="50" r="46" fill="#0d1117" stroke="#00f2fe" stroke-width="3"/><path d="M25 70 V30 L50 55 L75 30 V70" fill="none" stroke="#00f2fe" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="65" r="5" fill="#05d5a1"/></svg>`,
       currentOffer: {
-        title: "Bet £10, Get £30 in Free Bets",
+        title: "No Live Data Found",
         type: "free-bet",
         minDeposit: 10,
-        minStake: 10,
+        minStake: 0,
         minOdds: 2.0, // 1/1
-        bonusAmount: 30,
+        bonusAmount: 0,
         bonusType: "Free Bets",
         promoCode: "BETGET30",
         wageringRequirements: "None (winnings paid as cash minus free bet stake)",
@@ -28,25 +28,17 @@ export const PROMO_DATA = {
         rating: 4.6
       },
       historicalOffers: [
-        { year: 2022, bonusAmount: 20, minStake: 20, type: "free-bet", title: "Bet £20, Get £20 in Free Bets" },
-        { year: 2023, bonusAmount: 20, minStake: 10, type: "free-bet", title: "Bet £10, Get £20 in Free Bets" },
-        { year: 2024, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets + 50 Free Spins" },
-        { year: 2025, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets" },
-        { year: 2026, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets" }
-      ]
-    },
-    {
-      id: "bet365",
+        { year: 2022, bonusAmount: 0, minStake: 0, type: "free-bet", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found",
       name: "bet365",
       themeColor: "#12ca7e",
       logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><rect width="92" height="92" rx="20" x="4" y="4" fill="#12ca7e"/><text x="50" y="58" font-family="'Outfit', sans-serif" font-weight="900" font-size="28" fill="#ffffff" text-anchor="middle">365</text><text x="50" y="82" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#0c5a38" text-anchor="middle">BET</text></svg>`,
       currentOffer: {
-        title: "Bet £10, Get £30 in Free Bets",
+        title: "No Live Data Found",
         type: "free-bet",
         minDeposit: 10,
-        minStake: 10,
+        minStake: 0,
         minOdds: 1.5, // 1/2
-        bonusAmount: 30,
+        bonusAmount: 0,
         bonusType: "Bet Credits",
         promoCode: "None",
         wageringRequirements: "None (winnings paid as cash minus free bet stake)",
@@ -63,25 +55,17 @@ export const PROMO_DATA = {
         rating: 4.9
       },
       historicalOffers: [
-        { year: 2022, bonusAmount: 50, minStake: 10, type: "free-bet", title: "Bet £10, Get £50 in Free Bets" },
-        { year: 2023, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets" },
-        { year: 2024, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets" },
-        { year: 2025, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets" },
-        { year: 2026, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets" }
-      ]
-    },
-    {
-      id: "skybet",
+        { year: 2022, bonusAmount: 0, minStake: 0, type: "free-bet", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found",
       name: "Sky Bet",
       themeColor: "#4a90e2",
       logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><circle cx="50" cy="50" r="46" fill="#111e38" stroke="#4a90e2" stroke-width="3"/><path d="M30 65 L45 35 L60 65" fill="none" stroke="#e02020" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M50 35 H75" fill="none" stroke="#4a90e2" stroke-width="8" stroke-linecap="round"/><text x="50" y="85" font-family="'Outfit', sans-serif" font-weight="900" font-size="14" fill="#ffffff" text-anchor="middle">SKY BET</text></svg>`,
       currentOffer: {
-        title: "Get £30 in Free Bets when you place any bet",
+        title: "No Live Data Found",
         type: "free-bet",
         minDeposit: 5,
-        minStake: 0.05, // e.g. 5p
+        minStake: 0, // e.g. 5p
         minOdds: 2.0, // 1/1
-        bonusAmount: 30,
+        bonusAmount: 0,
         bonusType: "Free Bets",
         promoCode: "None",
         wageringRequirements: "None",
@@ -98,11 +82,9 @@ export const PROMO_DATA = {
         rating: 4.8
       },
       historicalOffers: [
-        { year: 2022, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" },
-        { year: 2023, bonusAmount: 30, minStake: 5, type: "free-bet", title: "Bet £5, Get £30 in Free Bets" },
-        { year: 2024, bonusAmount: 30, minStake: 0.05, type: "free-bet", title: "Bet 5p, Get £30 in Free Bets" },
-        { year: 2025, bonusAmount: 30, minStake: 0.05, type: "free-bet", title: "Bet any amount, Get £30 in Free Bets" },
-        { year: 2026, bonusAmount: 30, minStake: 0.05, type: "free-bet", title: "Place any bet, Get £30 in Free Bets" }
+        { year: 2022, bonusAmount: 0, minStake: 0, type: "free-bet", title: "No Live Data Found", title: "No Live Data Found", title: "Bet 5p, Get £30 in Free Bets" },
+        { year: 2025, bonusAmount: 0, minStake: 0, type: "free-bet", title: "Bet any amount, Get £30 in Free Bets" },
+        { year: 2026, bonusAmount: 0, minStake: 0, type: "free-bet", title: "Place any bet, Get £30 in Free Bets" }
       ]
     },
     {
@@ -111,12 +93,12 @@ export const PROMO_DATA = {
       themeColor: "#00c853",
       logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><circle cx="50" cy="50" r="46" fill="#005520" stroke="#00c853" stroke-width="3"/><path d="M35 30 L55 30 C65 30, 65 45, 55 45 L35 45 Z" fill="none" stroke="#ffffff" stroke-width="8" stroke-linejoin="round"/><path d="M45 45 L65 45 C75 45, 75 65, 65 65 L45 65 Z" fill="none" stroke="#ffffff" stroke-width="8" stroke-linejoin="round"/><path d="M45 30 V70" fill="none" stroke="#00c853" stroke-width="8"/></svg>`,
       currentOffer: {
-        title: "Bet £10, Get £40 in Free Bets",
+        title: "No Live Data Found",
         type: "free-bet",
         minDeposit: 10,
-        minStake: 10,
+        minStake: 0,
         minOdds: 1.5,
-        bonusAmount: 40,
+        bonusAmount: 0,
         bonusType: "Free Bets",
         promoCode: "YSKASV",
         wageringRequirements: "None",
@@ -133,25 +115,17 @@ export const PROMO_DATA = {
         rating: 4.7
       },
       historicalOffers: [
-        { year: 2022, bonusAmount: 20, minStake: 10, type: "free-bet", title: "Bet £10, Get £20 in Free Bets" },
-        { year: 2023, bonusAmount: 30, minStake: 10, type: "free-bet", title: "Bet £10, Get £30 in Free Bets" },
-        { year: 2024, bonusAmount: 40, minStake: 10, type: "free-bet", title: "Bet £10, Get £40 in Free Bets" },
-        { year: 2025, bonusAmount: 50, minStake: 10, type: "free-bet", title: "Bet £10, Get £50 in Free Bets (Temporary)" },
-        { year: 2026, bonusAmount: 40, minStake: 10, type: "free-bet", title: "Bet £10, Get £40 in Free Bets" }
-      ]
-    },
-    {
-      id: "coral",
+        { year: 2022, bonusAmount: 0, minStake: 0, type: "free-bet", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found",
       name: "Coral",
       themeColor: "#ff7043",
       logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><circle cx="50" cy="50" r="46" fill="#0d47a1" stroke="#ff7043" stroke-width="3"/><path d="M25 40 Q50 15 75 40 Q50 65 25 40" fill="none" stroke="#ffffff" stroke-width="6"/><path d="M25 60 Q50 35 75 60" fill="none" stroke="#ff7043" stroke-width="6"/></svg>`,
       currentOffer: {
-        title: "Bet £5, Get £20 in Free Bets",
+        title: "No Live Data Found",
         type: "free-bet",
         minDeposit: 5,
-        minStake: 5,
+        minStake: 0,
         minOdds: 1.5,
-        bonusAmount: 20,
+        bonusAmount: 0,
         bonusType: "Free Bets",
         promoCode: "None",
         wageringRequirements: "None",
@@ -168,25 +142,17 @@ export const PROMO_DATA = {
         rating: 4.3
       },
       historicalOffers: [
-        { year: 2022, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" },
-        { year: 2023, bonusAmount: 30, minStake: 5, type: "free-bet", title: "Bet £5, Get £30 in Free Bets" },
-        { year: 2024, bonusAmount: 30, minStake: 5, type: "free-bet", title: "Bet £5, Get £30 in Free Bets" },
-        { year: 2025, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" },
-        { year: 2026, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" }
-      ]
-    },
-    {
-      id: "ladbrokes",
+        { year: 2022, bonusAmount: 0, minStake: 0, type: "free-bet", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found",
       name: "Ladbrokes",
       themeColor: "#ff1744",
       logoSvg: `<svg viewBox="0 0 100 100" class="op-logo-svg"><circle cx="50" cy="50" r="46" fill="#d50000" stroke="#ffffff" stroke-width="3"/><path d="M35 25 V75 H65" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M45 45 H60" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/></svg>`,
       currentOffer: {
-        title: "Bet £5, Get £20 in Free Bets",
+        title: "No Live Data Found",
         type: "free-bet",
         minDeposit: 5,
-        minStake: 5,
+        minStake: 0,
         minOdds: 1.5,
-        bonusAmount: 20,
+        bonusAmount: 0,
         bonusType: "Free Bets",
         promoCode: "None",
         wageringRequirements: "None",
@@ -203,16 +169,7 @@ export const PROMO_DATA = {
         rating: 4.4
       },
       historicalOffers: [
-        { year: 2022, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" },
-        { year: 2023, bonusAmount: 30, minStake: 5, type: "free-bet", title: "Bet £5, Get £30 in Free Bets" },
-        { year: 2024, bonusAmount: 30, minStake: 5, type: "free-bet", title: "Bet £5, Get £30 in Free Bets" },
-        { year: 2025, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" },
-        { year: 2026, bonusAmount: 20, minStake: 5, type: "free-bet", title: "Bet £5, Get £20 in Free Bets" }
-      ]
-    }
-  ],
-  marketAnalysis: {
-    summary: "The UK welcome offer market has experienced downward pressure on average bonus values over the past five years. Following regulatory adjustments in 2023 and compliance audits targeting promotional mechanics, major operators shifted their focus from massive high-risk matches to lower-barrier, high-turnover offers (e.g. 'Bet £5 Get £20'). Average value peaked around 2022, when operators like bet365 routinely offered £50 bonuses, but has settled into a standard £20–£30 equilibrium in 2026.",
+        { year: 2022, bonusAmount: 0, minStake: 0, type: "free-bet", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found", title: "No Live Data Found",
     trends: [
       { year: 2022, averageValue: 30.0, regPressure: "Low", description: "Aggressive competition; higher average bonus values (£50 bet365 standard)." },
       { year: 2023, averageValue: 26.6, regPressure: "Medium", description: "UKGC customer verification and stake limits lead to reduction in bonus sizes." },
