@@ -62,8 +62,15 @@
 
         <!-- Filters Section -->
         <section class="glass-card filters-card">
-          <h2>Filter Offers</h2>
-          <div class="filter-group">
+          <button class="mobile-filter-toggle" id="mobile-filter-toggle">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <svg viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
+              <h2 style="margin-bottom: 0;">Filter Offers</h2>
+            </div>
+            <svg class="chevron-icon" id="filter-chevron" viewBox="0 0 24 24" width="24" height="24"><path fill="currentColor" d="M7 10l5 5 5-5z"/></svg>
+          </button>
+          <div class="filter-content" id="filter-content">
+            <div class="filter-group">
             <label>Operators</label>
             <div class="checkbox-list" id="operator-checkboxes">
               <!-- Dynamically populated -->
@@ -78,6 +85,7 @@
             <input type="range" id="max-stake-range" min="0" max="20" step="1" value="20">
           </div>
           <button id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
+          </div>
         </section>
       </aside>
 

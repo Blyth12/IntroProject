@@ -101,6 +101,16 @@ function populateFilters() {
 
 // --- Set Up Event Listeners ---
 function setupEventListeners() {
+  // Mobile Filter Accordion Toggle
+  const mobileFilterToggle = document.getElementById('mobile-filter-toggle');
+  const filterContent = document.getElementById('filter-content');
+  if (mobileFilterToggle && filterContent) {
+    mobileFilterToggle.addEventListener('click', () => {
+      mobileFilterToggle.classList.toggle('open');
+      filterContent.classList.toggle('open');
+    });
+  }
+
   // Search input
   DOM.searchInput.addEventListener('input', (e) => {
     state.searchQuery = e.target.value.toLowerCase().trim();
