@@ -6,7 +6,7 @@ export const PROMO_DATA = {
       "themeColor": "#00f2fe",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#0d1117\" stroke=\"#00f2fe\" stroke-width=\"3\"/><path d=\"M25 70 V30 L50 55 L75 30 V70\" fill=\"none\" stroke=\"#00f2fe\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"50\" cy=\"65\" r=\"5\" fill=\"#05d5a1\"/></svg>",
       "currentOffer": {
-        "title": "Bet £10, Get £30 in Free Bets",
+        "title": "Bet £10 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -29,7 +29,7 @@ export const PROMO_DATA = {
           "Receive 3 x £10 free bet tokens (£10 Single, £10 Acca, £10 Bet Builder) upon qualifying bet settlement."
         ],
         "terms": "New customers only. 18+. UK only. Minimum deposit £10. Place a £10 accumulator bet with a minimum of 4 legs and total odds of 2.0 or higher. Free bets credited upon settlement. Exclusion list applies. GambleAware.org.",
-        "url": "https://www.midnite.com",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.6
       },
       "historicalOffers": [
@@ -66,7 +66,7 @@ export const PROMO_DATA = {
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10, Get £30 in Free Bets"
+          "title": "Bet £10 Get £30 in Free Bets"
         }
       ]
     },
@@ -76,7 +76,7 @@ export const PROMO_DATA = {
       "themeColor": "#12ca7e",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#12ca7e\"/><text x=\"50\" y=\"58\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"#ffffff\" text-anchor=\"middle\">365</text><text x=\"50\" y=\"82\" font-family=\"'Inter', sans-serif\" font-weight=\"600\" font-size=\"12\" fill=\"#0c5a38\" text-anchor=\"middle\">BET</text></svg>",
       "currentOffer": {
-        "title": "Bet £10, Get £30 in Free Bets",
+        "title": "Bet £10 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -99,7 +99,7 @@ export const PROMO_DATA = {
           "Your Bet Credits (£30) will be released shortly after your qualifying bet settles."
         ],
         "terms": "New Customers only. Bet £10 & Get £30 in Free Bets for new customers at bet365. Min deposit requirement. Free Bets are paid as Bet Credits and are available for use upon settlement of qualifying bets. Min odds, bet and payment method exclusions apply. Returns exclude Bet Credits stake. Time limits and T&Cs apply.",
-        "url": "https://www.bet365.com",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.9
       },
       "historicalOffers": [
@@ -136,7 +136,7 @@ export const PROMO_DATA = {
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10, Get £30 in Free Bets"
+          "title": "Bet £10 Get £30 in Free Bets"
         }
       ]
     },
@@ -146,12 +146,12 @@ export const PROMO_DATA = {
       "themeColor": "#ff7043",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#0d47a1\" stroke=\"#ff7043\" stroke-width=\"3\"/><path d=\"M25 40 Q50 15 75 40 Q50 65 25 40\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"6\"/><path d=\"M25 60 Q50 35 75 60\" fill=\"none\" stroke=\"#ff7043\" stroke-width=\"6\"/></svg>",
       "currentOffer": {
-        "title": "Bet £5, Get £20 in Free Bets",
+        "title": "Bet £5 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 5,
         "minStake": 5,
         "minOdds": 1.5,
-        "bonusAmount": 20,
+        "bonusAmount": 30,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -170,7 +170,7 @@ export const PROMO_DATA = {
           "Get a £20 free bet credited immediately (credited as 1 x £20 token)."
         ],
         "terms": "18+ Eligible UK+IRE players. PayPal & some deposit & bet types excl. Min first £5 bet within 14 days of account reg at min odds 1/2 = 1.5. Gen £20 free bet credited. Free bet valid for 7 days. Free bet stake not returned. T&Cs apply.",
-        "url": "https://www.coral.co.uk",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.3
       },
       "historicalOffers": [
@@ -204,10 +204,10 @@ export const PROMO_DATA = {
         },
         {
           "year": 2026,
-          "bonusAmount": 20,
+          "bonusAmount": 30,
           "minStake": 5,
           "type": "free-bet",
-          "title": "Bet £5, Get £20 in Free Bets"
+          "title": "Bet £5 Get £30 in Free Bets"
         }
       ]
     },
@@ -217,12 +217,12 @@ export const PROMO_DATA = {
       "themeColor": "#ff1744",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#d50000\" stroke=\"#ffffff\" stroke-width=\"3\"/><path d=\"M35 25 V75 H65\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M45 45 H60\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"6\" stroke-linecap=\"round\"/></svg>",
       "currentOffer": {
-        "title": "Bet £5, Get £20 in Free Bets",
+        "title": "Bet £5 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 5,
         "minStake": 5,
         "minOdds": 1.5,
-        "bonusAmount": 20,
+        "bonusAmount": 30,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -242,7 +242,7 @@ export const PROMO_DATA = {
           "Receive 4 x £5 free bet tokens instantly."
         ],
         "terms": "18+ New UK & ROI customers only. Min deposit £5. Place a first bet of £5 or more at odds of 1/2 (1.5) or larger. 4 x £5 free bets credited upon placing. Free bets valid for 7 days. Free bet stakes not returned. Certain deposit methods excluded. Full T&Cs apply.",
-        "url": "https://www.ladbrokes.com",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.4
       },
       "historicalOffers": [
@@ -276,10 +276,10 @@ export const PROMO_DATA = {
         },
         {
           "year": 2026,
-          "bonusAmount": 20,
+          "bonusAmount": 30,
           "minStake": 5,
           "type": "free-bet",
-          "title": "Bet £5, Get £20 in Free Bets"
+          "title": "Bet £5 Get £30 in Free Bets"
         }
       ]
     },
@@ -289,12 +289,12 @@ export const PROMO_DATA = {
       "themeColor": "#003366",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#003366\"/><text x=\"50\" y=\"55\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"#ffffff\" text-anchor=\"middle\">BETFRED</text></svg>",
       "currentOffer": {
-        "title": "Sample",
+        "title": "Bet £10 Get £50 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 30,
+        "bonusAmount": 50,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -302,7 +302,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.5
       },
       "historicalOffers": [
@@ -326,6 +326,13 @@ export const PROMO_DATA = {
           "minStake": 10,
           "type": "free-bet",
           "title": "Bet £10 Get £50"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 50,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £50 in Free Bets"
         }
       ]
     },
@@ -335,7 +342,7 @@ export const PROMO_DATA = {
       "themeColor": "#0a264a",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#0a264a\"/><text x=\"50\" y=\"55\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"#ffffff\" text-anchor=\"middle\">BetVictor</text></svg>",
       "currentOffer": {
-        "title": "Sample",
+        "title": "Bet £10 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -348,7 +355,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -365,6 +372,13 @@ export const PROMO_DATA = {
           "minStake": 10,
           "type": "free-bet",
           "title": "Bet £10 Get £20"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30 in Free Bets"
         }
       ]
     },
@@ -374,7 +388,7 @@ export const PROMO_DATA = {
       "themeColor": "#006633",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#006633\" stroke=\"#ffffff\" stroke-width=\"3\"/><text x=\"50\" y=\"55\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"18\" fill=\"#ffffff\" text-anchor=\"middle\">UNIBET</text></svg>",
       "currentOffer": {
-        "title": "Sample",
+        "title": "Bet £10 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -387,7 +401,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.3
       },
       "historicalOffers": [
@@ -404,6 +418,13 @@ export const PROMO_DATA = {
           "minStake": 10,
           "type": "free-bet",
           "title": "Bet £10 Get £40"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30 in Free Bets"
         }
       ]
     },
@@ -413,12 +434,12 @@ export const PROMO_DATA = {
       "themeColor": "#b29759",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#000000\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"#b29759\" text-anchor=\"middle\">BetMGM</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "Bet £10 & Get £40 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 40,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -426,10 +447,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.5
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 40,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 & Get £40 in Free Bets"
+        }
+      ]
     },
     {
       "id": "livescorebet",
@@ -437,12 +466,12 @@ export const PROMO_DATA = {
       "themeColor": "#ff4d00",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#ff4d00\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">LiveScore</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "Bet £10 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 30,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -450,7 +479,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.4
       },
       "historicalOffers": [
@@ -467,6 +496,13 @@ export const PROMO_DATA = {
           "minStake": 10,
           "type": "free-bet",
           "title": "Bet £10 Get £30"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30 in Free Bets"
         }
       ]
     },
@@ -476,7 +512,7 @@ export const PROMO_DATA = {
       "themeColor": "#000000",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#000000\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"#ffffff\" text-anchor=\"middle\">CopyBet</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "No Live Data Found (Scrape Failed)",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 0,
@@ -489,7 +525,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -499,6 +535,13 @@ export const PROMO_DATA = {
           "minStake": 20,
           "type": "free-bet",
           "title": "Bet £20 Get £60"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 365,
+          "minStake": 0,
+          "type": "free-bet",
+          "title": "bet365"
         }
       ]
     },
@@ -508,7 +551,7 @@ export const PROMO_DATA = {
       "themeColor": "#000000",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#000000\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Betway</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "No Live Data Found (Scrape Failed)",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 0,
@@ -521,10 +564,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 365,
+          "minStake": 0,
+          "type": "free-bet",
+          "title": "bet365"
+        }
+      ]
     },
     {
       "id": "boylesports",
@@ -532,12 +583,12 @@ export const PROMO_DATA = {
       "themeColor": "#005baa",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#005baa\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">BoyleSports</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "Bet £10 Get £40 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 40,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -545,7 +596,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -562,6 +613,13 @@ export const PROMO_DATA = {
           "minStake": 10,
           "type": "free-bet",
           "title": "Bet £10 Get £20"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 40,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £40 in Free Bets"
         }
       ]
     },
@@ -571,12 +629,12 @@ export const PROMO_DATA = {
       "themeColor": "#d90000",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#d90000\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Virgin Bet</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "Bet £10 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 30,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -584,7 +642,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -601,6 +659,13 @@ export const PROMO_DATA = {
           "minStake": 10,
           "type": "free-bet",
           "title": "Bet £10 Get £20"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30 in Free Bets"
         }
       ]
     },
@@ -610,7 +675,7 @@ export const PROMO_DATA = {
       "themeColor": "#ffdc00",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#ffdc00\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">TalkSport Bet</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "No Live Data Found (Scrape Failed)",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 0,
@@ -623,10 +688,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 365,
+          "minStake": 0,
+          "type": "free-bet",
+          "title": "bet365"
+        }
+      ]
     },
     {
       "id": "kwiff",
@@ -634,12 +707,12 @@ export const PROMO_DATA = {
       "themeColor": "#6e00ff",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#6e00ff\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Kwiff</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "Bet £10 Get £40 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 40,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -647,7 +720,7 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -664,6 +737,13 @@ export const PROMO_DATA = {
           "minStake": 10,
           "type": "free-bet",
           "title": "Bet £10 Get £30"
+        },
+        {
+          "year": 2026,
+          "bonusAmount": 40,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £40 in Free Bets"
         }
       ]
     },
@@ -673,12 +753,12 @@ export const PROMO_DATA = {
       "themeColor": "#d5001c",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#d5001c\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Tote</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "Bet £10 Get £30 in Free Bets",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 30,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -686,10 +766,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30 in Free Bets"
+        }
+      ]
     },
     {
       "id": "betgoodwin",
@@ -697,12 +785,12 @@ export const PROMO_DATA = {
       "themeColor": "#ffcc00",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#ffcc00\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">BetGoodwin</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "Bet £10 & Get a £10 Free Bet",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 10,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 10,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -710,10 +798,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 10,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 & Get a £10 Free Bet"
+        }
+      ]
     },
     {
       "id": "starsports",
@@ -721,12 +817,12 @@ export const PROMO_DATA = {
       "themeColor": "#1e3a5f",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#1e3a5f\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Star Sports</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "BET £20 GET £10 IN FREE BETS",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 0,
+        "minStake": 20,
         "minOdds": 1.5,
-        "bonusAmount": 0,
+        "bonusAmount": 10,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -734,10 +830,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 10,
+          "minStake": 20,
+          "type": "free-bet",
+          "title": "BET £20 GET £10 IN FREE BETS"
+        }
+      ]
     },
     {
       "id": "quinnbet",
@@ -745,7 +849,7 @@ export const PROMO_DATA = {
       "themeColor": "#004d33",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#004d33\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">QuinnBet</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "No Live Data Found (Scrape Failed)",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 0,
@@ -758,10 +862,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 365,
+          "minStake": 0,
+          "type": "free-bet",
+          "title": "bet365"
+        }
+      ]
     },
     {
       "id": "skybet",
@@ -769,7 +881,7 @@ export const PROMO_DATA = {
       "themeColor": "#4a90e2",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#4a90e2\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Sky Bet</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found",
+        "title": "No Live Data Found (Scrape Failed)",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 0,
@@ -782,10 +894,18 @@ export const PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "",
+        "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 6,
+          "minStake": 0,
+          "type": "free-bet",
+          "title": "Sky Bet Super 6 Tips"
+        }
+      ]
     }
   ],
   "marketAnalysis": {

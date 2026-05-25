@@ -5,6 +5,7 @@ import { PROMO_DATA } from './data.js';
 const state = {
   searchQuery: '',
   selectedOperators: [],
+  selectedOfferTypes: [],
   minBonus: 0,
   maxStake: 20,
   sortBy: 'rating',
@@ -19,6 +20,7 @@ const DOM = {
   resultsCount: document.getElementById('results-count'),
   searchInput: document.getElementById('search-input'),
   operatorCheckboxesContainer: document.getElementById('operator-checkboxes'),
+  offerTypeCheckboxesContainer: document.getElementById('offer-type-checkboxes'),
   minBonusRange: document.getElementById('min-bonus-range'),
   minBonusLabel: document.getElementById('min-bonus-label'),
   maxStakeRange: document.getElementById('max-stake-range'),
@@ -99,6 +101,39 @@ function populateFilters() {
     label.appendChild(document.createTextNode(` ${op.name}`));
     DOM.operatorCheckboxesContainer.appendChild(label);
   });
+
+  // Populate offer types checkboxes
+  DOM.offerTypeCheckboxesContainer.innerHTML = '';
+  
+  const OFFER_TYPES = {
+    'free-bet': 'Free Bets',
+    'free-spins': 'Free Spins',
+    'money-back': 'Money Back (Risk-Free)',
+    'deposit-match': 'Deposit Match',
+    'no-deposit': 'No Deposit'
+  };
+  
+  Object.entries(OFFER_TYPES).forEach(([typeVal, typeLabel]) => {
+    const label = document.createElement('label');
+    label.className = 'checkbox-item';
+    
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = typeVal;
+    checkbox.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        state.selectedOfferTypes.push(typeVal);
+      } else {
+        state.selectedOfferTypes = state.selectedOfferTypes.filter(val => val !== typeVal);
+      }
+      state.currentPage = 1;
+      renderOffers();
+    });
+    
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(` ${typeLabel}`));
+    DOM.offerTypeCheckboxesContainer.appendChild(label);
+  });
 }
 
 // --- Set Up Event Listeners ---
@@ -146,6 +181,7 @@ function setupEventListeners() {
   DOM.resetFiltersBtn.addEventListener('click', () => {
     state.searchQuery = '';
     state.selectedOperators = [];
+    state.selectedOfferTypes = [];
     state.minBonus = 0;
     state.maxStake = 20;
     state.sortBy = 'rating';
@@ -158,8 +194,8 @@ function setupEventListeners() {
     DOM.maxStakeLabel.textContent = '£20';
     DOM.sortSelect.value = 'rating';
     
-    // Uncheck checkboxes
-    const checkboxes = DOM.operatorCheckboxesContainer.querySelectorAll('input[type="checkbox"]');
+    // Uncheck checkboxes in both lists
+    const checkboxes = document.querySelectorAll('.checkbox-list input[type="checkbox"]');
     checkboxes.forEach(cb => cb.checked = false);
     
     renderOffers();
@@ -227,6 +263,11 @@ function renderOffers() {
     
     // Operator selection filter
     if (state.selectedOperators.length > 0 && !state.selectedOperators.includes(op.id)) {
+      return false;
+    }
+    
+    // Offer type selection filter
+    if (state.selectedOfferTypes.length > 0 && !state.selectedOfferTypes.includes(offer.type)) {
       return false;
     }
     
@@ -448,10 +489,20 @@ function calculateBudgetPotential() {
 
   let totalSpend = 0;
   let totalBonus = 0;
+  let totalEv = 0;
   
   eligibleOperators.forEach(op => {
-    totalSpend += op.currentOffer.minStake;
-    totalBonus += op.currentOffer.bonusAmount;
+    const offer = op.currentOffer;
+    totalSpend += offer.minStake;
+    totalBonus += offer.bonusAmount;
+    
+    // EV retention rate: 70% for free-bet/money-back, 35% for free-spins, 40% for deposit-match, 100% for no-deposit
+    let retention = 0.70;
+    if (offer.type === 'free-spins') retention = 0.35;
+    else if (offer.type === 'deposit-match') retention = 0.40;
+    else if (offer.type === 'no-deposit') retention = 1.00;
+    
+    totalEv += offer.bonusAmount * retention;
   });
 
   // Render values
@@ -459,9 +510,7 @@ function calculateBudgetPotential() {
   DOM.calcTotalBonus.textContent = `£${totalBonus.toFixed(2)}`;
   DOM.calcEligibleCount.textContent = `${eligibleOperators.length} Operator${eligibleOperators.length === 1 ? '' : 's'}`;
   
-  // Standard matched betting free bet value retention is roughly 70%
-  const evValue = totalBonus * 0.70;
-  DOM.calcEvEstimate.textContent = `£${evValue.toFixed(2)}`;
+  DOM.calcEvEstimate.textContent = `£${totalEv.toFixed(2)}`;
 
   // Populate Recommendations Checklist
   DOM.calcRecommendations.innerHTML = '';

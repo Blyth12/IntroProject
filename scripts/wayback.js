@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
-const { parseOfferString } = require('./parser');
+const { parseOfferString, categorizeOfferType } = require('./parser');
 
 function getCardContainer($, $el) {
   let current = $el;
@@ -103,12 +103,13 @@ async function runWaybackScraper() {
             year,
             bonusAmount: parsed.bonus,
             minStake: parsed.stake,
-            type: "free-bet",
+            type: categorizeOfferType(parsed.title),
             title: parsed.title
           };
           
           if (existingIndex !== -1) {
-            console.log(`  [${op.name}] Already exists for ${year}. Keeping existing.`);
+            console.log(`  [${op.name}] Already exists for ${year}. Updating type if needed.`);
+            op.historicalOffers[existingIndex].type = categorizeOfferType(parsed.title);
           } else {
             console.log(`  [${op.name}] Adding ${year}: "${parsed.title}" (Stake: £${parsed.stake}, Bonus: £${parsed.bonus})`);
             op.historicalOffers.push(offerObj);
@@ -122,11 +123,12 @@ async function runWaybackScraper() {
               year,
               bonusAmount: parsed.bonus,
               minStake: parsed.stake,
-              type: "free-bet",
+              type: categorizeOfferType(parsed.title),
               title: parsed.title
             };
             if (existingIndex !== -1) {
-              console.log(`  [${op.name}] Already exists for ${year} (Direct match). Keeping existing.`);
+              console.log(`  [${op.name}] Already exists for ${year} (Direct match). Updating type if needed.`);
+              op.historicalOffers[existingIndex].type = categorizeOfferType(parsed.title);
             } else {
               console.log(`  [${op.name}] Adding ${year} (Direct match): "${parsed.title}" (Stake: £${parsed.stake}, Bonus: £${parsed.bonus})`);
               op.historicalOffers.push(offerObj);
