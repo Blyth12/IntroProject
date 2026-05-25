@@ -3,6 +3,14 @@ const path = require('path');
 const cheerio = require('cheerio');
 const { parseOfferString, categorizeOfferType } = require('./parser');
 
+function cleanBrandNumbers(str) {
+  return str
+    .replace(/bet365/ig, 'bet')
+    .replace(/888casino/ig, 'casino')
+    .replace(/10bet/ig, 'bet')
+    .replace(/32red/ig, 'red');
+}
+
 function getCardContainer($, $el) {
   let current = $el;
   for (let i = 0; i < 5; i++) {
@@ -18,6 +26,18 @@ function getCardContainer($, $el) {
         className.includes('layout') || className.includes('body') || className.includes('header') || 
         className.includes('footer') || className.includes('container') || tagName === 'body' || tagName === 'html') {
       return current; // Return current which is the child of the container
+    }
+
+    // Stop if parent contains links to more than 1 operator (it's a container of cards)
+    const betLinks = [];
+    parent.find('a').each((k, a) => {
+      const href = $(a).attr('href') || '';
+      if (href.includes('/bet/') && !betLinks.includes(href)) {
+        betLinks.push(href);
+      }
+    });
+    if (betLinks.length > 1) {
+      return current;
     }
     
     // Stop if parent is explicitly a card/tip wrapper (and NOT an inner element detail)
@@ -37,8 +57,12 @@ function getCardContainer($, $el) {
 
 const offerPatterns = [
   /Bet\s*£?(\d+(?:\.\d+)?).*?Get\s*£?(\d+(?:\.\d+)?)/i, // Bet X Get Y
-  /Get\s*£?(\d+(?:\.\d+)?)\s*(?:Free\s*Bet|Bonus|Free\s*Spins|Money\s*Back)/i, // Get X ...
-  /£?(\d+(?:\.\d+)?)\s*(?:Free\s*Bet|Bonus|Free\s*Spins|Money\s*Back)/i,       // X Free Bet/Bonus/Spins/Money Back
+  /Deposit\s*£?(\d+(?:\.\d+)?).*?Get\s*£?(\d+(?:\.\d+)?)/i, // Deposit X Get Y
+  /Get\s*£?(\d+(?:\.\d+)?)\s*(?:Free\s*Bet|Bonus|Free\s*Spins|Money\s*Back|Bingo)/i, // Get X ...
+  /£?(\d+(?:\.\d+)?)\s*(?:Free\s*Bet|Bonus|Free\s*Spins|Money\s*Back|Bingo)/i,       // X Free Bet/Bonus/Spins/Money Back
+  /£?(\d+(?:\.\d+)?)\s*(?:Wager-Free\s+|in\s+)*Bingo\s*(?:Bonus|Tickets|Money)/i, // X Bingo Bonus/Tickets
+  /(\d+)\s*(?:Free\s*)?Bingo\s*(?:Tickets|Bonus)/i, // X Bingo Tickets
+  /Worth\s*£?(\d+(?:\.\d+)?)/i, // Worth X
   /Match\s*up\s*to\s*£?(\d+)/i,                                                // Match up to X
   /Refund\s*up\s*to\s*£?(\d+)/i,                                                // Refund up to X
   /No\s*Deposit\s*£?(\d+)/i,                                                   // No Deposit X
@@ -50,14 +74,22 @@ function extractOffersFromHtml(html) {
   let scraped = [];
   
   $('*').each((i, el) => {
-    const directText = $(el).clone().children().remove().end().text().replace(/\s+/g, ' ').trim();
+    const rawText = $(el).clone().children().remove().end().text().replace(/\s+/g, ' ').trim();
+    const directText = cleanBrandNumbers(rawText);
     
     if (directText.length > 5 && directText.length < 150) {
       const match = offerPatterns.some(regex => regex.test(directText));
       if (match) {
         const card = getCardContainer($, $(el));
-        const contextText = card.text().replace(/\s+/g, ' ').toLowerCase();
-        scraped.push({ offerText: directText, contextText: contextText });
+        
+        // Build richer context text including all href attributes inside the card
+        let contextText = card.text().replace(/\s+/g, ' ').toLowerCase();
+        card.find('a').each((j, linkEl) => {
+          const href = $(linkEl).attr('href') || '';
+          contextText += ' ' + href.toLowerCase();
+        });
+        
+        scraped.push({ offerText: rawText, contextText: contextText });
       }
     }
   });
@@ -85,10 +117,9 @@ async function runScraper() {
   });
 
   const scrapePages = [
-    { url: 'https://www.whichbookie.co.uk/free-bets/', priority: 4 },
-    { url: 'https://www.whichbookie.co.uk/no-deposit-bonuses/', priority: 3 },
-    { url: 'https://www.whichbookie.co.uk/free-spins/', priority: 2 },
-    { url: 'https://www.whichbookie.co.uk/casino-bonuses/', priority: 1 }
+    { url: 'https://www.whichbookie.co.uk/free-bets/', priority: 3, type: 'free-bet' },
+    { url: 'https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/', priority: 2, type: 'free-spins-no-deposit' },
+    { url: 'https://www.whichbookie.co.uk/bingo/', priority: 1, type: 'bingo' }
   ];
 
   try {
@@ -109,6 +140,7 @@ async function runScraper() {
         pageOffers.forEach(o => {
           o.priority = page.priority;
           o.sourceUrl = page.url;
+          o.type = page.type;
         });
         
         allScrapedOffers.push(...pageOffers);
@@ -122,7 +154,20 @@ async function runScraper() {
     // Apply live data by contextual mapping
     PROMO_DATA.operators.forEach((op) => {
       const normalizedOpName = op.name.toLowerCase().replace(/\s+/g, '');
-      const matches = allScrapedOffers.filter(so => so.contextText.replace(/\s+/g, '').includes(normalizedOpName));
+      const matches = allScrapedOffers.filter(so => {
+        const normContext = so.contextText.replace(/\s+/g, '');
+        if (normContext.includes(normalizedOpName)) {
+          return true;
+        }
+        // Aliases / variations
+        if (normalizedOpName === 'skybet' && normContext.includes('skyvegas')) {
+          return true;
+        }
+        if (normalizedOpName === 'livescorebet' && normContext.includes('livescore')) {
+          return true;
+        }
+        return false;
+      });
       
       if (matches.length > 0) {
         // Sort matches by priority descending
@@ -132,13 +177,22 @@ async function runScraper() {
         const parsed = parseOfferString(bestMatch.offerText);
         
         if (parsed.bonus > 0) {
-          console.log(`[${op.name}] Matched: "${parsed.title}" (Type: ${categorizeOfferType(parsed.title)}) from ${bestMatch.sourceUrl}`);
+          console.log(`[${op.name}] Matched: "${parsed.title}" (Type: ${bestMatch.type}) from ${bestMatch.sourceUrl}`);
           
           op.currentOffer.title = parsed.title;
           op.currentOffer.bonusAmount = parsed.bonus;
           op.currentOffer.minStake = parsed.stake;
-          op.currentOffer.type = categorizeOfferType(parsed.title);
+          op.currentOffer.type = bestMatch.type;
           op.currentOffer.url = bestMatch.sourceUrl; // Set dynamic url to the page where it was matched
+          
+          // Map type to user-friendly bonusType badge name
+          if (bestMatch.type === 'free-bet') {
+            op.currentOffer.bonusType = 'Free Bets';
+          } else if (bestMatch.type === 'free-spins-no-deposit') {
+            op.currentOffer.bonusType = 'Free Spins';
+          } else if (bestMatch.type === 'bingo') {
+            op.currentOffer.bonusType = 'Bingo Bonus';
+          }
           
           // Push or update current year live data in historicalOffers
           const currentYear = new Date().getFullYear();
@@ -147,7 +201,7 @@ async function runScraper() {
             year: currentYear,
             bonusAmount: parsed.bonus,
             minStake: parsed.stake,
-            type: categorizeOfferType(parsed.title),
+            type: bestMatch.type,
             title: parsed.title
           };
           

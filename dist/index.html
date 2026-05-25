@@ -851,6 +851,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-size: 13px;
 }
 
+.timeline-controls-wrap {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
 .operator-selector-wrapper.global-selector {
   margin-bottom: 0;
   display: flex;
@@ -1562,10 +1568,38 @@ input[type="range"]::-webkit-slider-thumb:hover {
     align-items: stretch;
     gap: 16px;
   }
+
+  .timeline-controls-wrap {
+    flex-direction: column;
+    width: 100%;
+  }
   
   .operator-selector-wrapper.global-selector {
     width: 100%;
   }
+}
+
+/* --- Historical Disclaimer Styling --- */
+.historical-disclaimer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 16px 20px;
+  background: rgba(16, 24, 40, 0.4);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.historical-disclaimer svg {
+  flex-shrink: 0;
+  color: var(--primary);
+  opacity: 0.85;
 }
 
 </style>
@@ -1774,7 +1808,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
           <div class="historical-grid">
             <!-- Line Chart Section -->
             <article class="glass-card chart-card">
-              <h2>Historical Value Trends</h2>
+              <h2>Historical Free Bet Value Trends</h2>
               <p class="section-desc">Welcome bonus values, minimum stakes, and estimated net values across years.</p>
               <div class="chart-container" id="chart-container">
                 <!-- SVG Chart will be injected here -->
@@ -1817,6 +1851,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
                 </div>
               </div>
             </article>
+          </div>
+          
+          <!-- Historical Disclaimer -->
+          <div class="historical-disclaimer">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            <span><strong>Disclaimer:</strong> Historical promotional tracking information is only compiled for operators with at least two years of sports welcome offer data. Operators focusing exclusively on casino or bingo promotions, or those with less than two years of tracked history, are not shown in individual focus charts.</span>
           </div>
         </section>
       </main>
@@ -1981,7 +2021,7 @@ window.PROMO_DATA = {
         "minStake": 10,
         "minOdds": 1.5,
         "bonusAmount": 30,
-        "bonusType": "Bet Credits",
+        "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None (winnings paid as cash minus free bet stake)",
         "expiryDays": 30,
@@ -2434,13 +2474,6 @@ window.PROMO_DATA = {
           "minStake": 20,
           "type": "free-bet",
           "title": "Bet £20 Get £60"
-        },
-        {
-          "year": 2026,
-          "bonusAmount": 365,
-          "minStake": 0,
-          "type": "free-bet",
-          "title": "bet365"
         }
       ]
     },
@@ -2466,15 +2499,7 @@ window.PROMO_DATA = {
         "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": [
-        {
-          "year": 2026,
-          "bonusAmount": 365,
-          "minStake": 0,
-          "type": "free-bet",
-          "title": "bet365"
-        }
-      ]
+      "historicalOffers": []
     },
     {
       "id": "boylesports",
@@ -2590,15 +2615,7 @@ window.PROMO_DATA = {
         "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": [
-        {
-          "year": 2026,
-          "bonusAmount": 365,
-          "minStake": 0,
-          "type": "free-bet",
-          "title": "bet365"
-        }
-      ]
+      "historicalOffers": []
     },
     {
       "id": "kwiff",
@@ -2764,15 +2781,7 @@ window.PROMO_DATA = {
         "url": "https://www.whichbookie.co.uk/free-bets/",
         "rating": 4.2
       },
-      "historicalOffers": [
-        {
-          "year": 2026,
-          "bonusAmount": 365,
-          "minStake": 0,
-          "type": "free-bet",
-          "title": "bet365"
-        }
-      ]
+      "historicalOffers": []
     },
     {
       "id": "skybet",
@@ -2780,29 +2789,283 @@ window.PROMO_DATA = {
       "themeColor": "#4a90e2",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#4a90e2\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Sky Bet</text></svg>",
       "currentOffer": {
-        "title": "No Live Data Found (Scrape Failed)",
-        "type": "free-bet",
+        "title": "70 Free Spins - No Deposit",
+        "type": "free-spins-no-deposit",
         "minDeposit": 10,
         "minStake": 0,
         "minOdds": 1.5,
-        "bonusAmount": 0,
-        "bonusType": "Free Bets",
+        "bonusAmount": 7,
+        "bonusType": "Free Spins",
         "promoCode": "None",
         "wageringRequirements": "None",
         "expiryDays": 7,
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
         "rating": 4.2
+      },
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 7,
+          "minStake": 0,
+          "type": "free-spins-no-deposit",
+          "title": "70 Free Spins - No Deposit"
+        }
+      ]
+    },
+    {
+      "id": "paddypower",
+      "name": "Paddy Power",
+      "themeColor": "#00db80",
+      "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#006547\"/><text x=\"50\" y=\"58\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"32\" fill=\"#00db80\" text-anchor=\"middle\">PP</text></svg>",
+      "currentOffer": {
+        "title": "60 No Deposit Free Spins",
+        "type": "free-spins-no-deposit",
+        "minDeposit": 10,
+        "minStake": 0,
+        "minOdds": 1.5,
+        "bonusAmount": 6,
+        "bonusType": "Free Spins",
+        "promoCode": "None",
+        "wageringRequirements": "None",
+        "expiryDays": 7,
+        "depositExclusions": [],
+        "steps": [
+          "Register a new account on Paddy Power.",
+          "Provide verification details as requested.",
+          "Free spins will be credited to your account automatically."
+        ],
+        "terms": "New customers only. 18+. Opt in required. Free spins valid for 7 days. UK and Ireland only. GambleAware.org.",
+        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "rating": 4.6
       },
       "historicalOffers": [
         {
           "year": 2026,
           "bonusAmount": 6,
           "minStake": 0,
-          "type": "free-bet",
-          "title": "Sky Bet Super 6 Tips"
+          "type": "free-spins-no-deposit",
+          "title": "60 No Deposit Free Spins"
+        }
+      ]
+    },
+    {
+      "id": "888casino",
+      "name": "888casino",
+      "themeColor": "#88e000",
+      "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#1a1a1a\"/><text x=\"50\" y=\"58\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"#88e000\" text-anchor=\"middle\">888</text><text x=\"50\" y=\"80\" font-family=\"'Inter', sans-serif\" font-weight=\"600\" font-size=\"10\" fill=\"#ffffff\" text-anchor=\"middle\">CASINO</text></svg>",
+      "currentOffer": {
+        "title": "50 Free Spins - No Deposit",
+        "type": "free-spins-no-deposit",
+        "minDeposit": 10,
+        "minStake": 0,
+        "minOdds": 1.5,
+        "bonusAmount": 5,
+        "bonusType": "Free Spins",
+        "promoCode": "None",
+        "wageringRequirements": "None",
+        "expiryDays": 14,
+        "depositExclusions": [],
+        "steps": [
+          "Sign up at 888casino.",
+          "Claim the free spins through the email or SMS verification link.",
+          "Enjoy your wager-free spins on selected games."
+        ],
+        "terms": "New players only. 18+. Claim within 48 hours. Spins expire in 14 days. Winnings capped. Full T&Cs apply.",
+        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "rating": 4.5
+      },
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 5,
+          "minStake": 0,
+          "type": "free-spins-no-deposit",
+          "title": "50 Free Spins - No Deposit"
+        }
+      ]
+    },
+    {
+      "id": "mrq",
+      "name": "MrQ",
+      "themeColor": "#5d0df8",
+      "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#5d0df8\"/><text x=\"50\" y=\"62\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"36\" fill=\"#ffffff\" text-anchor=\"middle\">MrQ</text></svg>",
+      "currentOffer": {
+        "title": "10 Free Spins For New Players",
+        "type": "free-spins-no-deposit",
+        "minDeposit": 10,
+        "minStake": 0,
+        "minOdds": 1.5,
+        "bonusAmount": 1,
+        "bonusType": "Free Spins",
+        "promoCode": "None",
+        "wageringRequirements": "None",
+        "expiryDays": 7,
+        "depositExclusions": [],
+        "steps": [
+          "Sign up on MrQ casino.",
+          "Complete the standard mobile verification.",
+          "Spins will be instantly credited to your account."
+        ],
+        "terms": "New players only. 18+. Mobile verification required. Free spins valid for 7 days. No wagering requirements on winnings.",
+        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "rating": 4.7
+      },
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 1,
+          "minStake": 0,
+          "type": "free-spins-no-deposit",
+          "title": "10 Free Spins For New Players"
+        }
+      ]
+    },
+    {
+      "id": "yeticasino",
+      "name": "Yeti Casino",
+      "themeColor": "#00a2e8",
+      "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#00a2e8\"/><text x=\"50\" y=\"58\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"32\" fill=\"#ffffff\" text-anchor=\"middle\">Yeti</text></svg>",
+      "currentOffer": {
+        "title": "23 No Deposit Free Spins and 77 Wager-Free Spins When You Bet £10",
+        "type": "free-spins-no-deposit",
+        "minDeposit": 10,
+        "minStake": 10,
+        "minOdds": 1.5,
+        "bonusAmount": 7.7,
+        "bonusType": "Free Spins",
+        "promoCode": "None",
+        "wageringRequirements": "40x",
+        "expiryDays": 30,
+        "depositExclusions": [],
+        "steps": [
+          "Register a new account on Yeti Casino.",
+          "Verify your registration details.",
+          "Launch the designated game to claim your spins."
+        ],
+        "terms": "New players only. 18+. 40x wagering on winnings. Valid for 30 days. Full terms apply. GambleAware.org.",
+        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "rating": 4.4
+      },
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 7.7,
+          "minStake": 10,
+          "type": "free-spins-no-deposit",
+          "title": "23 No Deposit Free Spins and 77 Wager-Free Spins When You Bet £10"
+        }
+      ]
+    },
+    {
+      "id": "meccabingo",
+      "name": "Mecca Bingo",
+      "themeColor": "#e6007e",
+      "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#e6007e\"/><text x=\"50\" y=\"58\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"30\" fill=\"#ffffff\" text-anchor=\"middle\">Mecca</text></svg>",
+      "currentOffer": {
+        "title": "£20 in Bingo Bonus Money",
+        "type": "bingo",
+        "minDeposit": 10,
+        "minStake": 0,
+        "minOdds": 1,
+        "bonusAmount": 20,
+        "bonusType": "Bingo Bonus",
+        "promoCode": "None",
+        "wageringRequirements": "2x",
+        "expiryDays": 7,
+        "depositExclusions": [],
+        "steps": [
+          "Register at Mecca Bingo online.",
+          "Deposit and spend £5 or more on bingo games.",
+          "Receive your bingo bonus funds automatically."
+        ],
+        "terms": "New customers only. 18+. Min deposit £5. Spend £5 on bingo within 7 days. 2x wagering requirement on bingo bonus.",
+        "url": "https://www.whichbookie.co.uk/bingo/",
+        "rating": 4.6
+      },
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 20,
+          "minStake": 0,
+          "type": "bingo",
+          "title": "£20 in Bingo Bonus Money"
+        }
+      ]
+    },
+    {
+      "id": "heartbingo",
+      "name": "Heart Bingo",
+      "themeColor": "#e50000",
+      "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#e50000\"/><path d=\"M50 30 C35 10, 10 30, 50 80 C90 30, 65 10, 50 30 Z\" fill=\"#ffffff\"/></svg>",
+      "currentOffer": {
+        "title": "500 Bingo Tickets Worth £50",
+        "type": "bingo",
+        "minDeposit": 10,
+        "minStake": 0,
+        "minOdds": 1,
+        "bonusAmount": 50,
+        "bonusType": "Bingo Bonus",
+        "promoCode": "None",
+        "wageringRequirements": "None",
+        "expiryDays": 7,
+        "depositExclusions": [],
+        "steps": [
+          "Register at Heart Bingo.",
+          "Opt in to the welcome promotion.",
+          "Deposit and play £10 in any bingo room within 7 days.",
+          "Claim your bingo tickets in the lobby."
+        ],
+        "terms": "New customers only. 18+. Opt in, deposit and play £10 on bingo within 7 days. Tickets worth up to £50. Full terms apply.",
+        "url": "https://www.whichbookie.co.uk/bingo/",
+        "rating": 4.5
+      },
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 50,
+          "minStake": 0,
+          "type": "bingo",
+          "title": "500 Bingo Tickets Worth £50"
+        }
+      ]
+    },
+    {
+      "id": "jackpotjoy",
+      "name": "Jackpotjoy",
+      "themeColor": "#0054a6",
+      "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#0054a6\"/><text x=\"50\" y=\"58\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"24\" fill=\"#ffffff\" text-anchor=\"middle\">JACKPOT</text><text x=\"50\" y=\"80\" font-family=\"'Inter', sans-serif\" font-weight=\"600\" font-size=\"12\" fill=\"#05d5a1\" text-anchor=\"middle\">JOY</text></svg>",
+      "currentOffer": {
+        "title": "£30 Wager-Free Bingo Bonus Funds",
+        "type": "bingo",
+        "minDeposit": 10,
+        "minStake": 0,
+        "minOdds": 1,
+        "bonusAmount": 30,
+        "bonusType": "Bingo Bonus",
+        "promoCode": "None",
+        "wageringRequirements": "None",
+        "expiryDays": 30,
+        "depositExclusions": [],
+        "steps": [
+          "Sign up at Jackpotjoy.",
+          "Opt in to the welcome offer.",
+          "Deposit £10 and play £10 on any games.",
+          "Receive £30 in wager-free bingo tickets."
+        ],
+        "terms": "New members only. 18+. Min £10 deposit & play. Winnings paid as cash. 30 days expiry. Full T&Cs apply.",
+        "url": "https://www.whichbookie.co.uk/bingo/",
+        "rating": 4.7
+      },
+      "historicalOffers": [
+        {
+          "year": 2026,
+          "bonusAmount": 30,
+          "minStake": 0,
+          "type": "bingo",
+          "title": "£30 Wager-Free Bingo Bonus Funds"
         }
       ]
     }
@@ -2956,10 +3219,8 @@ function populateFilters() {
   
   const OFFER_TYPES = {
     'free-bet': 'Free Bets',
-    'free-spins': 'Free Spins',
-    'money-back': 'Money Back (Risk-Free)',
-    'deposit-match': 'Deposit Match',
-    'no-deposit': 'No Deposit'
+    'free-spins-no-deposit': 'Free Spins',
+    'bingo': 'Bingo Bonuses'
   };
   
   Object.entries(OFFER_TYPES).forEach(([typeVal, typeLabel]) => {
@@ -3345,11 +3606,10 @@ function calculateBudgetPotential() {
     totalSpend += offer.minStake;
     totalBonus += offer.bonusAmount;
     
-    // EV retention rate: 70% for free-bet/money-back, 35% for free-spins, 40% for deposit-match, 100% for no-deposit
+    // EV retention rate: 70% for free-bet, 50% for free-spins-no-deposit and bingo
     let retention = 0.70;
-    if (offer.type === 'free-spins') retention = 0.35;
-    else if (offer.type === 'deposit-match') retention = 0.40;
-    else if (offer.type === 'no-deposit') retention = 1.00;
+    if (offer.type === 'free-spins-no-deposit') retention = 0.50;
+    else if (offer.type === 'bingo') retention = 0.50;
     
     totalEv += offer.bonusAmount * retention;
   });
@@ -3495,24 +3755,34 @@ const DOM = {
   timelineFeedContainer: document.getElementById('timeline-feed-container')
 };
 
+// --- Helper for Offer Type Display Names ---
+function getFriendlyTypeName(type) {
+  if (type === 'free-spins-no-deposit') return 'Free Spins';
+  if (type === 'bingo') return 'Bingo';
+  return 'Free Bet';
+}
+
 // --- Initialization ---
 function init() {
   renderMarketSummary();
   populateOpFilter();
-  renderTimelineFeed('all');
-  renderSvgChart('all');
+  
+  const initialOp = DOM.timelineOpFilter.value || 'all';
+  
+  renderTimelineFeed(initialOp, 'free-bet');
+  renderSvgChart(initialOp, 'free-bet');
 
-  // Listen for filter changes on both timeline feed and chart
-  DOM.timelineOpFilter.addEventListener('change', (e) => {
-    const val = e.target.value;
-    renderTimelineFeed(val);
-    renderSvgChart(val);
+  // Listen for filter changes on Focus Brand dropdown
+  DOM.timelineOpFilter.addEventListener('change', () => {
+    const op = DOM.timelineOpFilter.value;
+    renderTimelineFeed(op, 'free-bet');
+    renderSvgChart(op, 'free-bet');
   });
 
   // Re-draw chart when the historical trends tab is opened
   window.addEventListener('tab-changed', (e) => {
     if (e.detail === 'timeline') {
-      renderSvgChart(DOM.timelineOpFilter.value);
+      renderSvgChart(DOM.timelineOpFilter.value, 'free-bet');
     }
   });
 }
@@ -3529,24 +3799,30 @@ function populateOpFilter() {
   DOM.timelineOpFilter.innerHTML = '<option value="all">All Brands (Averages)</option>';
   
   PROMO_DATA.operators.forEach(op => {
-    const opt = document.createElement('option');
-    opt.value = op.id;
-    opt.textContent = op.name;
-    DOM.timelineOpFilter.appendChild(opt);
+    // Only include brands that have at least two years of historical welcome offers of type 'free-bet'
+    const freeBetHistoryCount = op.historicalOffers.filter(h => h.type === 'free-bet').length;
+    if (freeBetHistoryCount >= 2) {
+      const opt = document.createElement('option');
+      opt.value = op.id;
+      opt.textContent = op.name;
+      DOM.timelineOpFilter.appendChild(opt);
+    }
   });
 }
 
 // --- Compile Historical Comparison Data Series ---
-function getHistoricalDataSeries(operatorId) {
+function getHistoricalDataSeries(operatorId, offerType = 'free-bet') {
   if (operatorId === 'all') {
     const years = [2022, 2023, 2024, 2025, 2026];
-    return years.map(year => {
+    const result = [];
+    
+    years.forEach(year => {
       let totalBonus = 0;
       let totalStake = 0;
       let count = 0;
       
       PROMO_DATA.operators.forEach(op => {
-        const hist = op.historicalOffers.find(h => h.year === year);
+        const hist = op.historicalOffers.find(h => h.year === year && h.type === offerType);
         if (hist) {
           totalBonus += hist.bonusAmount;
           totalStake += hist.minStake;
@@ -3554,31 +3830,38 @@ function getHistoricalDataSeries(operatorId) {
         }
       });
       
-      const avgBonus = count > 0 ? totalBonus / count : 0;
-      const avgStake = count > 0 ? totalStake / count : 0;
-      const avgProfit = avgBonus * 0.70;
-      
-      return {
-        year,
-        bonus: avgBonus,
-        stake: avgStake,
-        profit: avgProfit,
-        description: `Average stats across all ${count} tracked operators.`
-      };
+      if (count > 0) {
+        const avgBonus = totalBonus / count;
+        const avgStake = totalStake / count;
+        const retention = offerType === 'free-bet' ? 0.70 : 0.50;
+        const avgProfit = avgBonus * retention;
+        
+        result.push({
+          year,
+          bonus: avgBonus,
+          stake: avgStake,
+          profit: avgProfit,
+          description: `Average stats across ${count} tracked ${getFriendlyTypeName(offerType)} operators.`
+        });
+      }
     });
+    
+    return result;
   } else {
     const op = PROMO_DATA.operators.find(o => o.id === operatorId);
     if (!op) return [];
     
-    // Only map years that actually exist in the operator's data
-    const sortedHist = [...op.historicalOffers].sort((a, b) => a.year - b.year);
+    // Only map years that actually exist in the operator's data for this specific offer type
+    const filteredHist = op.historicalOffers.filter(h => h.type === offerType);
+    const sortedHist = [...filteredHist].sort((a, b) => a.year - b.year);
+    const retention = offerType === 'free-bet' ? 0.70 : 0.50;
     
     return sortedHist.map(hist => {
       return {
         year: hist.year,
         bonus: hist.bonusAmount,
         stake: hist.minStake,
-        profit: hist.bonusAmount * 0.70,
+        profit: hist.bonusAmount * retention,
         description: hist.title || `${op.name} Welcome Offer`
       };
     });
@@ -3586,17 +3869,17 @@ function getHistoricalDataSeries(operatorId) {
 }
 
 // --- Render SVG Trend Chart ---
-function renderSvgChart(operatorId = 'all') {
+function renderSvgChart(operatorId = 'all', offerType = 'free-bet') {
   const container = DOM.chartContainer;
   container.innerHTML = ''; // Clear previous
 
-  const dataSeries = getHistoricalDataSeries(operatorId);
+  const dataSeries = getHistoricalDataSeries(operatorId, offerType);
   
   if (dataSeries.length === 0) {
     container.innerHTML = `
       <div class="no-historical-data" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 250px; color: var(--text-muted); font-size: 14px; text-align: center;">
         <svg viewBox="0 0 24 24" width="48" height="48" style="margin-bottom: 12px; opacity: 0.5; color: var(--text-dim);"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM11 7h2v2h-2zm0 4h2v6h-2z"/></svg>
-        <span>No historical welcome offer data available for this brand.</span>
+        <span>No historical welcome offer data found for ${getFriendlyTypeName(offerType)} offers under this brand selection.</span>
       </div>
     `;
     return;
@@ -3815,7 +4098,7 @@ function renderSvgChart(operatorId = 'all') {
 }
 
 // --- Render Operator Timeline Feed ---
-function renderTimelineFeed(operatorId) {
+function renderTimelineFeed(operatorId, offerType = 'free-bet') {
   DOM.timelineFeedContainer.innerHTML = '';
 
   let events = [];
@@ -3825,6 +4108,8 @@ function renderTimelineFeed(operatorId) {
     if (operatorId !== 'all' && op.id !== operatorId) return;
 
     op.historicalOffers.forEach(hist => {
+      if (hist.type !== offerType) return;
+      
       events.push({
         opId: op.id,
         opName: op.name,
@@ -3833,7 +4118,7 @@ function renderTimelineFeed(operatorId) {
         bonusAmount: hist.bonusAmount,
         minStake: hist.minStake,
         title: hist.title,
-        notes: hist.notes || getDefaultNote(op.name, hist.year, hist.bonusAmount, hist.minStake)
+        notes: hist.notes || getDefaultNote(op.name, hist.year, hist.bonusAmount, hist.minStake, offerType)
       });
     });
   });
@@ -3845,7 +4130,7 @@ function renderTimelineFeed(operatorId) {
   });
 
   if (events.length === 0) {
-    DOM.timelineFeedContainer.innerHTML = '<p class="section-desc">No history items found.</p>';
+    DOM.timelineFeedContainer.innerHTML = '<p class="section-desc" style="text-align: center; margin-top: 40px; color: var(--text-muted)">No timeline items match this brand and offer type filter.</p>';
     return;
   }
 
@@ -3870,7 +4155,15 @@ function renderTimelineFeed(operatorId) {
 }
 
 // --- Helper to supply default notes if missing ---
-function getDefaultNote(opName, year, bonus, stake) {
+function getDefaultNote(opName, year, bonus, stake, offerType = 'free-bet') {
+  const typeLabel = getFriendlyTypeName(offerType);
+  if (offerType !== 'free-bet') {
+    if (year === 2026) {
+      return `${opName} launched a specialized welcome package focusing on ${typeLabel}. Current package gives ${offerType === 'free-spins-no-deposit' ? (bonus * 10) + ' spins' : '£' + bonus + ' bonus'} for casual casino users.`;
+    }
+    return `Offered a ${typeLabel} package of ${offerType === 'free-spins-no-deposit' ? (bonus * 10) + ' free spins' : '£' + bonus + ' bingo bonus'} to acquire new digital users.`;
+  }
+  
   if (year === 2026) {
     return `${opName} stabilized its acquisition budget. The £${bonus} package caters to UK GC regulatory changes.`;
   }

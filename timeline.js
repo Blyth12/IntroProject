@@ -8,24 +8,34 @@ const DOM = {
   timelineFeedContainer: document.getElementById('timeline-feed-container')
 };
 
+// --- Helper for Offer Type Display Names ---
+function getFriendlyTypeName(type) {
+  if (type === 'free-spins-no-deposit') return 'Free Spins';
+  if (type === 'bingo') return 'Bingo';
+  return 'Free Bet';
+}
+
 // --- Initialization ---
 function init() {
   renderMarketSummary();
   populateOpFilter();
-  renderTimelineFeed('all');
-  renderSvgChart('all');
+  
+  const initialOp = DOM.timelineOpFilter.value || 'all';
+  
+  renderTimelineFeed(initialOp, 'free-bet');
+  renderSvgChart(initialOp, 'free-bet');
 
-  // Listen for filter changes on both timeline feed and chart
-  DOM.timelineOpFilter.addEventListener('change', (e) => {
-    const val = e.target.value;
-    renderTimelineFeed(val);
-    renderSvgChart(val);
+  // Listen for filter changes on Focus Brand dropdown
+  DOM.timelineOpFilter.addEventListener('change', () => {
+    const op = DOM.timelineOpFilter.value;
+    renderTimelineFeed(op, 'free-bet');
+    renderSvgChart(op, 'free-bet');
   });
 
   // Re-draw chart when the historical trends tab is opened
   window.addEventListener('tab-changed', (e) => {
     if (e.detail === 'timeline') {
-      renderSvgChart(DOM.timelineOpFilter.value);
+      renderSvgChart(DOM.timelineOpFilter.value, 'free-bet');
     }
   });
 }
@@ -42,24 +52,30 @@ function populateOpFilter() {
   DOM.timelineOpFilter.innerHTML = '<option value="all">All Brands (Averages)</option>';
   
   PROMO_DATA.operators.forEach(op => {
-    const opt = document.createElement('option');
-    opt.value = op.id;
-    opt.textContent = op.name;
-    DOM.timelineOpFilter.appendChild(opt);
+    // Only include brands that have at least two years of historical welcome offers of type 'free-bet'
+    const freeBetHistoryCount = op.historicalOffers.filter(h => h.type === 'free-bet').length;
+    if (freeBetHistoryCount >= 2) {
+      const opt = document.createElement('option');
+      opt.value = op.id;
+      opt.textContent = op.name;
+      DOM.timelineOpFilter.appendChild(opt);
+    }
   });
 }
 
 // --- Compile Historical Comparison Data Series ---
-function getHistoricalDataSeries(operatorId) {
+function getHistoricalDataSeries(operatorId, offerType = 'free-bet') {
   if (operatorId === 'all') {
     const years = [2022, 2023, 2024, 2025, 2026];
-    return years.map(year => {
+    const result = [];
+    
+    years.forEach(year => {
       let totalBonus = 0;
       let totalStake = 0;
       let count = 0;
       
       PROMO_DATA.operators.forEach(op => {
-        const hist = op.historicalOffers.find(h => h.year === year);
+        const hist = op.historicalOffers.find(h => h.year === year && h.type === offerType);
         if (hist) {
           totalBonus += hist.bonusAmount;
           totalStake += hist.minStake;
@@ -67,31 +83,38 @@ function getHistoricalDataSeries(operatorId) {
         }
       });
       
-      const avgBonus = count > 0 ? totalBonus / count : 0;
-      const avgStake = count > 0 ? totalStake / count : 0;
-      const avgProfit = avgBonus * 0.70;
-      
-      return {
-        year,
-        bonus: avgBonus,
-        stake: avgStake,
-        profit: avgProfit,
-        description: `Average stats across all ${count} tracked operators.`
-      };
+      if (count > 0) {
+        const avgBonus = totalBonus / count;
+        const avgStake = totalStake / count;
+        const retention = offerType === 'free-bet' ? 0.70 : 0.50;
+        const avgProfit = avgBonus * retention;
+        
+        result.push({
+          year,
+          bonus: avgBonus,
+          stake: avgStake,
+          profit: avgProfit,
+          description: `Average stats across ${count} tracked ${getFriendlyTypeName(offerType)} operators.`
+        });
+      }
     });
+    
+    return result;
   } else {
     const op = PROMO_DATA.operators.find(o => o.id === operatorId);
     if (!op) return [];
     
-    // Only map years that actually exist in the operator's data
-    const sortedHist = [...op.historicalOffers].sort((a, b) => a.year - b.year);
+    // Only map years that actually exist in the operator's data for this specific offer type
+    const filteredHist = op.historicalOffers.filter(h => h.type === offerType);
+    const sortedHist = [...filteredHist].sort((a, b) => a.year - b.year);
+    const retention = offerType === 'free-bet' ? 0.70 : 0.50;
     
     return sortedHist.map(hist => {
       return {
         year: hist.year,
         bonus: hist.bonusAmount,
         stake: hist.minStake,
-        profit: hist.bonusAmount * 0.70,
+        profit: hist.bonusAmount * retention,
         description: hist.title || `${op.name} Welcome Offer`
       };
     });
@@ -99,17 +122,17 @@ function getHistoricalDataSeries(operatorId) {
 }
 
 // --- Render SVG Trend Chart ---
-function renderSvgChart(operatorId = 'all') {
+function renderSvgChart(operatorId = 'all', offerType = 'free-bet') {
   const container = DOM.chartContainer;
   container.innerHTML = ''; // Clear previous
 
-  const dataSeries = getHistoricalDataSeries(operatorId);
+  const dataSeries = getHistoricalDataSeries(operatorId, offerType);
   
   if (dataSeries.length === 0) {
     container.innerHTML = `
       <div class="no-historical-data" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 250px; color: var(--text-muted); font-size: 14px; text-align: center;">
         <svg viewBox="0 0 24 24" width="48" height="48" style="margin-bottom: 12px; opacity: 0.5; color: var(--text-dim);"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM11 7h2v2h-2zm0 4h2v6h-2z"/></svg>
-        <span>No historical welcome offer data available for this brand.</span>
+        <span>No historical welcome offer data found for ${getFriendlyTypeName(offerType)} offers under this brand selection.</span>
       </div>
     `;
     return;
@@ -328,7 +351,7 @@ function renderSvgChart(operatorId = 'all') {
 }
 
 // --- Render Operator Timeline Feed ---
-function renderTimelineFeed(operatorId) {
+function renderTimelineFeed(operatorId, offerType = 'free-bet') {
   DOM.timelineFeedContainer.innerHTML = '';
 
   let events = [];
@@ -338,6 +361,8 @@ function renderTimelineFeed(operatorId) {
     if (operatorId !== 'all' && op.id !== operatorId) return;
 
     op.historicalOffers.forEach(hist => {
+      if (hist.type !== offerType) return;
+      
       events.push({
         opId: op.id,
         opName: op.name,
@@ -346,7 +371,7 @@ function renderTimelineFeed(operatorId) {
         bonusAmount: hist.bonusAmount,
         minStake: hist.minStake,
         title: hist.title,
-        notes: hist.notes || getDefaultNote(op.name, hist.year, hist.bonusAmount, hist.minStake)
+        notes: hist.notes || getDefaultNote(op.name, hist.year, hist.bonusAmount, hist.minStake, offerType)
       });
     });
   });
@@ -358,7 +383,7 @@ function renderTimelineFeed(operatorId) {
   });
 
   if (events.length === 0) {
-    DOM.timelineFeedContainer.innerHTML = '<p class="section-desc">No history items found.</p>';
+    DOM.timelineFeedContainer.innerHTML = '<p class="section-desc" style="text-align: center; margin-top: 40px; color: var(--text-muted)">No timeline items match this brand and offer type filter.</p>';
     return;
   }
 
@@ -383,7 +408,15 @@ function renderTimelineFeed(operatorId) {
 }
 
 // --- Helper to supply default notes if missing ---
-function getDefaultNote(opName, year, bonus, stake) {
+function getDefaultNote(opName, year, bonus, stake, offerType = 'free-bet') {
+  const typeLabel = getFriendlyTypeName(offerType);
+  if (offerType !== 'free-bet') {
+    if (year === 2026) {
+      return `${opName} launched a specialized welcome package focusing on ${typeLabel}. Current package gives ${offerType === 'free-spins-no-deposit' ? (bonus * 10) + ' spins' : '£' + bonus + ' bonus'} for casual casino users.`;
+    }
+    return `Offered a ${typeLabel} package of ${offerType === 'free-spins-no-deposit' ? (bonus * 10) + ' free spins' : '£' + bonus + ' bingo bonus'} to acquire new digital users.`;
+  }
+  
   if (year === 2026) {
     return `${opName} stabilized its acquisition budget. The £${bonus} package caters to UK GC regulatory changes.`;
   }

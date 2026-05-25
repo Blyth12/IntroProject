@@ -107,10 +107,8 @@ function populateFilters() {
   
   const OFFER_TYPES = {
     'free-bet': 'Free Bets',
-    'free-spins': 'Free Spins',
-    'money-back': 'Money Back (Risk-Free)',
-    'deposit-match': 'Deposit Match',
-    'no-deposit': 'No Deposit'
+    'free-spins-no-deposit': 'Free Spins',
+    'bingo': 'Bingo Bonuses'
   };
   
   Object.entries(OFFER_TYPES).forEach(([typeVal, typeLabel]) => {
@@ -496,11 +494,10 @@ function calculateBudgetPotential() {
     totalSpend += offer.minStake;
     totalBonus += offer.bonusAmount;
     
-    // EV retention rate: 70% for free-bet/money-back, 35% for free-spins, 40% for deposit-match, 100% for no-deposit
+    // EV retention rate: 70% for free-bet, 50% for free-spins-no-deposit and bingo
     let retention = 0.70;
-    if (offer.type === 'free-spins') retention = 0.35;
-    else if (offer.type === 'deposit-match') retention = 0.40;
-    else if (offer.type === 'no-deposit') retention = 1.00;
+    if (offer.type === 'free-spins-no-deposit') retention = 0.50;
+    else if (offer.type === 'bingo') retention = 0.50;
     
     totalEv += offer.bonusAmount * retention;
   });
