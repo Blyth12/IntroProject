@@ -305,7 +305,29 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.5
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2022,
+          "bonusAmount": 60,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £60"
+        },
+        {
+          "year": 2024,
+          "bonusAmount": 50,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £50"
+        },
+        {
+          "year": 2025,
+          "bonusAmount": 50,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £50"
+        }
+      ]
     },
     {
       "id": "betvictor",
@@ -329,7 +351,22 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2024,
+          "bonusAmount": 40,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £40"
+        },
+        {
+          "year": 2025,
+          "bonusAmount": 20,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £20"
+        }
+      ]
     },
     {
       "id": "unibet",
@@ -353,7 +390,22 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.3
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2024,
+          "bonusAmount": 40,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £40"
+        },
+        {
+          "year": 2025,
+          "bonusAmount": 40,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £40"
+        }
+      ]
     },
     {
       "id": "betmgm",
@@ -401,7 +453,22 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.4
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2024,
+          "bonusAmount": 20,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £20"
+        },
+        {
+          "year": 2025,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30"
+        }
+      ]
     },
     {
       "id": "copybet",
@@ -425,7 +492,15 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2025,
+          "bonusAmount": 60,
+          "minStake": 20,
+          "type": "free-bet",
+          "title": "Bet £20 Get £60"
+        }
+      ]
     },
     {
       "id": "betway",
@@ -473,7 +548,22 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2024,
+          "bonusAmount": 20,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £20"
+        },
+        {
+          "year": 2025,
+          "bonusAmount": 20,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £20"
+        }
+      ]
     },
     {
       "id": "virginbet",
@@ -497,7 +587,22 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2024,
+          "bonusAmount": 20,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £20"
+        },
+        {
+          "year": 2025,
+          "bonusAmount": 20,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £20"
+        }
+      ]
     },
     {
       "id": "talksportbet",
@@ -545,7 +650,22 @@ export const PROMO_DATA = {
         "url": "",
         "rating": 4.2
       },
-      "historicalOffers": []
+      "historicalOffers": [
+        {
+          "year": 2024,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30"
+        },
+        {
+          "year": 2025,
+          "bonusAmount": 30,
+          "minStake": 10,
+          "type": "free-bet",
+          "title": "Bet £10 Get £30"
+        }
+      ]
     },
     {
       "id": "tote",

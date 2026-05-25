@@ -11,4 +11,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Vercel Rebuild
-        run: curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        # run: curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run:

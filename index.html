@@ -190,7 +190,42 @@
 
         <!-- Historical View -->
         <section id="timeline-view" class="tab-view">
+          <!-- Prominent Brand Filter Header Card -->
+          <div class="glass-card timeline-filter-card">
+            <div class="filter-header-text">
+              <h2>Historical Trends & Brand Insights</h2>
+              <p class="section-desc">Analyze welcome bonus histories and tracking metrics by selecting a focus brand below.</p>
+            </div>
+            <div class="operator-selector-wrapper global-selector">
+              <label for="timeline-op-filter">Focus Brand</label>
+              <div class="select-wrap">
+                <select id="timeline-op-filter">
+                  <option value="all">All Brands (Averages)</option>
+                  <!-- Dynamically populated -->
+                </select>
+              </div>
+            </div>
+          </div>
+
           <div class="historical-grid">
+            <!-- Line Chart Section -->
+            <article class="glass-card chart-card">
+              <h2>Historical Value Trends</h2>
+              <p class="section-desc">Welcome bonus values, minimum stakes, and estimated net values across years.</p>
+              <div class="chart-container" id="chart-container">
+                <!-- SVG Chart will be injected here -->
+              </div>
+            </article>
+
+            <!-- Operators Timeline List -->
+            <article class="glass-card timeline-feed-card">
+              <h2>Operator-Specific Changes</h2>
+              <p class="section-desc">Trace the evolution of signup packages for each major betting brand.</p>
+              <div class="timeline-feed" id="timeline-feed-container">
+                <!-- Dynamic timeline nodes from timeline.js -->
+              </div>
+            </article>
+
             <!-- Market Overview Analysis -->
             <article class="glass-card analysis-card">
               <h2>UK Gambling Bonus Market Analysis</h2>
@@ -216,31 +251,6 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </article>
-
-            <!-- Line Chart Section -->
-            <article class="glass-card chart-card">
-              <h2>Historical Value Trends (2022 - 2026)</h2>
-              <p class="section-desc">Average welcome bonus values across tracking operators in £ GBP.</p>
-              <div class="chart-container" id="chart-container">
-                <!-- SVG Chart will be injected here -->
-              </div>
-            </article>
-
-            <!-- Operators Timeline List -->
-            <article class="glass-card timeline-feed-card">
-              <h2>Operator-Specific Changes</h2>
-              <p class="section-desc">Trace the evolution of signup packages for each major betting brand.</p>
-              <div class="operator-selector-wrapper">
-                <label for="timeline-op-filter">Focus Brand:</label>
-                <select id="timeline-op-filter">
-                  <option value="all">All Brands</option>
-                  <!-- Dynamically populated -->
-                </select>
-              </div>
-              <div class="timeline-feed" id="timeline-feed-container">
-                <!-- Dynamic timeline nodes from timeline.js -->
               </div>
             </article>
           </div>

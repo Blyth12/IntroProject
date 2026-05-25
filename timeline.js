@@ -51,9 +51,8 @@ function populateOpFilter() {
 
 // --- Compile Historical Comparison Data Series ---
 function getHistoricalDataSeries(operatorId) {
-  const years = [2022, 2023, 2024, 2025, 2026];
-  
   if (operatorId === 'all') {
+    const years = [2022, 2023, 2024, 2025, 2026];
     return years.map(year => {
       let totalBonus = 0;
       let totalStake = 0;
@@ -84,18 +83,17 @@ function getHistoricalDataSeries(operatorId) {
     const op = PROMO_DATA.operators.find(o => o.id === operatorId);
     if (!op) return [];
     
-    return years.map(year => {
-      const hist = op.historicalOffers.find(h => h.year === year);
-      if (hist) {
-        return {
-          year,
-          bonus: hist.bonusAmount,
-          stake: hist.minStake,
-          profit: hist.bonusAmount * 0.70,
-          description: hist.title || `${op.name} Welcome Offer`
-        };
-      }
-      return { year, bonus: 0, stake: 0, profit: 0, description: 'No historical campaign data' };
+    // Only map years that actually exist in the operator's data
+    const sortedHist = [...op.historicalOffers].sort((a, b) => a.year - b.year);
+    
+    return sortedHist.map(hist => {
+      return {
+        year: hist.year,
+        bonus: hist.bonusAmount,
+        stake: hist.minStake,
+        profit: hist.bonusAmount * 0.70,
+        description: hist.title || `${op.name} Welcome Offer`
+      };
     });
   }
 }
@@ -106,19 +104,29 @@ function renderSvgChart(operatorId = 'all') {
   container.innerHTML = ''; // Clear previous
 
   const dataSeries = getHistoricalDataSeries(operatorId);
-  if (dataSeries.length === 0) return;
+  
+  if (dataSeries.length === 0) {
+    container.innerHTML = `
+      <div class="no-historical-data" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; min-height: 250px; color: var(--text-muted); font-size: 14px; text-align: center;">
+        <svg viewBox="0 0 24 24" width="48" height="48" style="margin-bottom: 12px; opacity: 0.5; color: var(--text-dim);"><path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM11 7h2v2h-2zm0 4h2v6h-2z"/></svg>
+        <span>No historical welcome offer data available for this brand.</span>
+      </div>
+    `;
+    return;
+  }
 
-  // Define SVG dimensions
-  const width = 560;
-  const height = 220;
-  const paddingLeft = 40;
-  const paddingRight = 20;
-  const paddingTop = 25;
-  const paddingBottom = 30;
+  // Define SVG dimensions (taller & wider)
+  const width = 800;
+  const height = 350;
+  const paddingLeft = 50;
+  const paddingRight = 25;
+  const paddingTop = 30;
+  const paddingBottom = 40;
 
-  // Grid bounds: 0 to 60 for absolute comparison of stakes vs bonuses
+  // Grid bounds: dynamically calculated Y-axis limit with a baseline of £60
   const minVal = 0;
-  const maxVal = 60;
+  const maxDataVal = Math.max(...dataSeries.map(d => Math.max(d.bonus, d.stake, d.profit)));
+  const maxVal = Math.max(60, Math.ceil(maxDataVal / 10) * 10);
 
   const years = dataSeries.map(d => d.year);
   const minYear = Math.min(...years);
@@ -126,6 +134,10 @@ function renderSvgChart(operatorId = 'all') {
 
   // Coordinate Mapping Helpers
   const mapX = (year) => {
+    if (minYear === maxYear) {
+      // Centered coordinate if only 1 data point is present
+      return paddingLeft + (width - paddingLeft - paddingRight) / 2;
+    }
     const ratio = (year - minYear) / (maxYear - minYear);
     return paddingLeft + ratio * (width - paddingLeft - paddingRight);
   };
@@ -137,7 +149,7 @@ function renderSvgChart(operatorId = 'all') {
 
   // Build grid lines and labels
   let gridLinesHtml = '';
-  const gridSteps = 4; // 0, 15, 30, 45, 60
+  const gridSteps = 4; // 0, 25%, 50%, 75%, 100%
   for (let i = 0; i <= gridSteps; i++) {
     const gridVal = minVal + i * ((maxVal - minVal) / gridSteps);
     const y = mapY(gridVal);
@@ -145,7 +157,7 @@ function renderSvgChart(operatorId = 'all') {
       <!-- Grid line -->
       <line x1="${paddingLeft}" y1="${y}" x2="${width - paddingRight}" y2="${y}" class="chart-grid-line" />
       <!-- Y-Axis Label -->
-      <text x="${paddingLeft - 10}" y="${y + 3}" class="chart-axis-text" text-anchor="end">£${gridVal}</text>
+      <text x="${paddingLeft - 12}" y="${y + 3}" class="chart-axis-text" text-anchor="end" style="font-size: 10px; font-weight: 500;">£${Math.round(gridVal)}</text>
     `;
   }
 
@@ -154,7 +166,7 @@ function renderSvgChart(operatorId = 'all') {
   dataSeries.forEach(t => {
     const x = mapX(t.year);
     xAxisHtml += `
-      <text x="${x}" y="${height - 10}" class="chart-axis-text" text-anchor="middle">${t.year}</text>
+      <text x="${x}" y="${height - 15}" class="chart-axis-text" text-anchor="middle" style="font-size: 10px; font-weight: 500;">${t.year}</text>
     `;
   });
 
@@ -163,8 +175,9 @@ function renderSvgChart(operatorId = 'all') {
   const stakePoints = dataSeries.map(d => ({ x: mapX(d.year), y: mapY(d.stake) }));
   const profitPoints = dataSeries.map(d => ({ x: mapX(d.year), y: mapY(d.profit) }));
 
-  // Helper to build SVG path definitions
+  // Helper to build SVG path definitions (safely skipping if <= 1 points)
   const buildPathD = (pts) => {
+    if (pts.length <= 1) return '';
     let d = `M ${pts[0].x} ${pts[0].y}`;
     for (let i = 1; i < pts.length; i++) {
       d += ` L ${pts[i].x} ${pts[i].y}`;
@@ -173,6 +186,7 @@ function renderSvgChart(operatorId = 'all') {
   };
 
   const buildAreaD = (pts) => {
+    if (pts.length <= 1) return '';
     let d = `M ${pts[0].x} ${pts[0].y}`;
     for (let i = 1; i < pts.length; i++) {
       d += ` L ${pts[i].x} ${pts[i].y}`;
