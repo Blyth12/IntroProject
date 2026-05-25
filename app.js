@@ -576,8 +576,8 @@ function formatOdds(odds) {
 }
 
 // --- Initialize App Execution ---
-document.addEventListener('DOMContentLoaded', init);
-// Run right away if DOM is already loaded
-if (document.readyState === 'interactive' || document.readyState === 'complete') {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
   init();
 }
