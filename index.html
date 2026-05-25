@@ -71,10 +71,12 @@
           </button>
           <div class="filter-content" id="filter-content">
             <div class="filter-group">
-              <label>Operators</label>
-              <div class="checkbox-list" id="operator-checkboxes">
-                <!-- Dynamically populated -->
-              </div>
+              <label for="min-bonus-range">Min Bonus Value: <span id="min-bonus-label">£0</span></label>
+              <input type="range" id="min-bonus-range" min="0" max="50" step="5" value="0">
+            </div>
+            <div class="filter-group">
+              <label for="max-stake-range">Max Qualifying Stake: <span id="max-stake-label">£20</span></label>
+              <input type="range" id="max-stake-range" min="0" max="20" step="1" value="20">
             </div>
             <div class="filter-group">
               <label>Offer Types</label>
@@ -82,15 +84,13 @@
                 <!-- Dynamically populated -->
               </div>
             </div>
-          <div class="filter-group">
-            <label for="min-bonus-range">Min Bonus Value: <span id="min-bonus-label">£0</span></label>
-            <input type="range" id="min-bonus-range" min="0" max="50" step="5" value="0">
-          </div>
-          <div class="filter-group">
-            <label for="max-stake-range">Max Qualifying Stake: <span id="max-stake-label">£20</span></label>
-            <input type="range" id="max-stake-range" min="0" max="20" step="1" value="20">
-          </div>
-          <button id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
+            <div class="filter-group">
+              <label>Operators</label>
+              <div class="checkbox-list" id="operator-checkboxes">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+            <button id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
           </div>
         </section>
       </aside>
@@ -291,19 +291,19 @@
       <div class="modal-body">
         <!-- Quick stats -->
         <div class="modal-quick-stats">
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-bonus-box">
             <span class="stat-lbl">Bonus Value</span>
             <span class="stat-val highlight-green" id="modal-stat-bonus">£30</span>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-stake-box">
             <span class="stat-lbl">Min Stake</span>
             <span class="stat-val" id="modal-stat-stake">£10</span>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-odds-box">
             <span class="stat-lbl">Min Odds</span>
             <span class="stat-val" id="modal-stat-odds">2.0</span>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-expiry-box">
             <span class="stat-lbl">Expiry</span>
             <span class="stat-val" id="modal-stat-expiry">7 Days</span>
           </div>

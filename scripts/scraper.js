@@ -55,6 +55,42 @@ function getCardContainer($, $el) {
   return current;
 }
 
+function extractRedirectLink($, card, sourceUrl) {
+  let link = '';
+  card.find('a').each((i, a) => {
+    let href = $(a).attr('href') || '';
+    if (!href) return;
+    
+    // Resolve relative URLs to absolute WhichBookie URLs
+    if (href.startsWith('/')) {
+      href = 'https://www.whichbookie.co.uk' + href;
+    }
+    
+    // Check if it's a redirect / claim link
+    const isRedirect = href.includes('/bet/') || href.includes('/visit/') || href.includes('/go/');
+    if (isRedirect) {
+      link = href;
+      return false; // Break loop
+    }
+  });
+  
+  // Fallback to first link inside card if no /bet/ link is found
+  if (!link) {
+    card.find('a').each((i, a) => {
+      let href = $(a).attr('href') || '';
+      if (href && !href.includes('review') && !href.includes('#')) {
+        if (href.startsWith('/')) {
+          href = 'https://www.whichbookie.co.uk' + href;
+        }
+        link = href;
+        return false; // Break loop
+      }
+    });
+  }
+  
+  return link || sourceUrl;
+}
+
 const offerPatterns = [
   /Bet\s*£?(\d+(?:\.\d+)?).*?Get\s*£?(\d+(?:\.\d+)?)/i, // Bet X Get Y
   /Deposit\s*£?(\d+(?:\.\d+)?).*?Get\s*£?(\d+(?:\.\d+)?)/i, // Deposit X Get Y
@@ -69,7 +105,7 @@ const offerPatterns = [
   /£?(\d+)\s*No\s*Deposit/i                                                    // X No Deposit
 ];
 
-function extractOffersFromHtml(html) {
+function extractOffersFromHtml(html, sourceUrl) {
   const $ = cheerio.load(html);
   let scraped = [];
   
@@ -89,7 +125,13 @@ function extractOffersFromHtml(html) {
           contextText += ' ' + href.toLowerCase();
         });
         
-        scraped.push({ offerText: rawText, contextText: contextText });
+        const redirectUrl = extractRedirectLink($, card, sourceUrl);
+        
+        scraped.push({ 
+          offerText: rawText, 
+          contextText: contextText,
+          redirectUrl: redirectUrl
+        });
       }
     }
   });
@@ -108,7 +150,7 @@ async function runScraper() {
   dataContent = dataContent.replace('export const PROMO_DATA = ', 'return ');
   const getStaticData = new Function(dataContent);
   const PROMO_DATA = getStaticData();
-
+ 
   // Wipe all sample data from memory so only successfully scraped data is shown!
   PROMO_DATA.operators.forEach(op => {
     op.currentOffer.title = "No Live Data Found (Scrape Failed)";
@@ -134,7 +176,7 @@ async function runScraper() {
           continue;
         }
         const html = await res.text();
-        const pageOffers = extractOffersFromHtml(html);
+        const pageOffers = extractOffersFromHtml(html, page.url);
         console.log(`  Found ${pageOffers.length} potential offer nodes.`);
         
         pageOffers.forEach(o => {
@@ -183,7 +225,7 @@ async function runScraper() {
           op.currentOffer.bonusAmount = parsed.bonus;
           op.currentOffer.minStake = parsed.stake;
           op.currentOffer.type = bestMatch.type;
-          op.currentOffer.url = bestMatch.sourceUrl; // Set dynamic url to the page where it was matched
+          op.currentOffer.url = bestMatch.redirectUrl; // Set dynamic url to the operator's tracking redirect link
           
           // Map type to user-friendly bonusType badge name
           if (bestMatch.type === 'free-bet') {

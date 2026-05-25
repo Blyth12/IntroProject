@@ -11,7 +11,7 @@ const state = {
   sortBy: 'rating',
   activeTab: 'offers',
   currentPage: 1,
-  itemsPerPage: 9
+  itemsPerPage: 12
 };
 
 // --- DOM References ---
@@ -53,6 +53,8 @@ const DOM = {
   modalStatStake: document.getElementById('modal-stat-stake'),
   modalStatOdds: document.getElementById('modal-stat-odds'),
   modalStatExpiry: document.getElementById('modal-stat-expiry'),
+  modalStatBonusBox: document.getElementById('modal-stat-bonus-box'),
+  modalStatOddsBox: document.getElementById('modal-stat-odds-box'),
   modalStepsList: document.getElementById('modal-steps-list'),
   modalExclusionsList: document.getElementById('modal-exclusions-list'),
   modalTermsText: document.getElementById('modal-terms-text'),
@@ -338,6 +340,15 @@ function renderOffers() {
     card.className = 'glass-card offer-card';
     card.style.setProperty('--op-theme', op.themeColor);
     
+    const statsGridHtml = `
+      <div class="card-stats-grid single-stat">
+        <div class="stat-item">
+          <span class="stat-label">Min Stake</span>
+          <span class="stat-value">£${offer.minStake.toFixed(2)}</span>
+        </div>
+      </div>
+    `;
+    
     card.innerHTML = `
       <div class="badge-offer-type">${offer.bonusType}</div>
       <div class="card-top">
@@ -355,30 +366,13 @@ function renderOffers() {
       
       <h4 class="offer-title-main">${offer.title}</h4>
       
-      <div class="card-stats-grid">
-        <div class="stat-item">
-          <span class="stat-label">Min Stake</span>
-          <span class="stat-value">£${offer.minStake.toFixed(2)}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Min Odds</span>
-          <span class="stat-value">${formatOdds(offer.minOdds)}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Promo Code</span>
-          <span class="stat-value" style="color: var(--primary)">${offer.promoCode}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Expiry</span>
-          <span class="stat-value">${offer.expiryDays} Days</span>
-        </div>
-      </div>
+      ${statsGridHtml}
       
       <div class="card-footer-controls">
         <button class="btn btn-primary btn-details" data-op-id="${op.id}">View Details & T&Cs</button>
-        <button class="btn-icon-only btn-visit" data-url="${offer.url}" title="Visit Operator Website">
+        <a href="${offer.url}" target="_blank" rel="noopener noreferrer" class="btn-icon-only btn-visit" title="Visit Operator Website">
           <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" fill="currentColor"/></svg>
-        </button>
+        </a>
       </div>
     `;
     
@@ -390,13 +384,6 @@ function renderOffers() {
     btn.addEventListener('click', (e) => {
       const opId = e.currentTarget.dataset.opId;
       openModal(opId);
-    });
-  });
-
-  DOM.offersContainer.querySelectorAll('.btn-visit').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const url = e.currentTarget.dataset.url;
-      window.open(url, '_blank');
     });
   });
 
@@ -559,26 +546,87 @@ function openModal(opId) {
   DOM.modalStatOdds.textContent = formatOdds(offer.minOdds);
   DOM.modalStatExpiry.textContent = `${offer.expiryDays} Days`;
 
+  // Toggle visibility of Bonus and Odds in details modal based on type
+  if (offer.type === 'free-spins-no-deposit') {
+    if (DOM.modalStatBonusBox) DOM.modalStatBonusBox.style.display = 'none';
+    if (DOM.modalStatOddsBox) DOM.modalStatOddsBox.style.display = 'none';
+  } else if (offer.type === 'bingo') {
+    if (DOM.modalStatBonusBox) DOM.modalStatBonusBox.style.display = '';
+    if (DOM.modalStatOddsBox) DOM.modalStatOddsBox.style.display = 'none';
+  } else { // free-bet
+    if (DOM.modalStatBonusBox) DOM.modalStatBonusBox.style.display = '';
+    if (DOM.modalStatOddsBox) DOM.modalStatOddsBox.style.display = '';
+  }
+
   // Build steps list
   DOM.modalStepsList.innerHTML = '';
-  offer.steps.forEach(step => {
-    const li = document.createElement('li');
-    li.innerHTML = step;
-    DOM.modalStepsList.appendChild(li);
-  });
+  const hasSteps = offer.steps && offer.steps.length > 0 && !(offer.steps.length === 1 && (!offer.steps[0] || offer.steps[0].toLowerCase() === 'none' || offer.steps[0].trim() === ''));
+  if (hasSteps) {
+    offer.steps.forEach(step => {
+      const li = document.createElement('li');
+      li.innerHTML = step;
+      DOM.modalStepsList.appendChild(li);
+    });
+  }
+  const claimSection = DOM.modalStepsList.closest('.modal-section');
+  if (claimSection) {
+    claimSection.style.display = hasSteps ? '' : 'none';
+  }
 
   // Build payment exclusions list
   DOM.modalExclusionsList.innerHTML = '';
-  offer.depositExclusions.forEach(ex => {
-    const pill = document.createElement('span');
-    pill.className = 'exclusion-pill';
-    pill.textContent = ex;
-    DOM.modalExclusionsList.appendChild(pill);
-  });
+  const hasExclusions = offer.depositExclusions && offer.depositExclusions.length > 0 && !(offer.depositExclusions.length === 1 && (!offer.depositExclusions[0] || offer.depositExclusions[0].toLowerCase() === 'none' || offer.depositExclusions[0].trim() === ''));
+  if (hasExclusions) {
+    offer.depositExclusions.forEach(ex => {
+      const pill = document.createElement('span');
+      pill.className = 'exclusion-pill';
+      pill.textContent = ex;
+      DOM.modalExclusionsList.appendChild(pill);
+    });
+  }
+  const exclusionsSection = DOM.modalExclusionsList.closest('.modal-section');
+  if (exclusionsSection) {
+    exclusionsSection.style.display = hasExclusions ? '' : 'none';
+  }
 
-  // Set terms detail & link
+  // Set terms detail
   DOM.modalTermsText.textContent = offer.terms;
+  const hasTerms = offer.terms && offer.terms.toLowerCase() !== 'none' && offer.terms.trim() !== '' && !offer.terms.includes('Detailed terms here...');
+  const termsSection = DOM.modalTermsText.closest('.modal-section');
+  if (termsSection) {
+    termsSection.style.display = hasTerms ? '' : 'none';
+  }
+
+  // Adjust columns layout for exclusions and terms grid wrapper
+  const sectionGrid = DOM.termsModal.querySelector('.modal-section-grid');
+  if (sectionGrid) {
+    if (!hasExclusions && !hasTerms) {
+      sectionGrid.style.display = 'none';
+    } else {
+      sectionGrid.style.display = '';
+      if (!hasExclusions || !hasTerms) {
+        sectionGrid.style.gridTemplateColumns = '1fr';
+      } else {
+        sectionGrid.style.gridTemplateColumns = '';
+      }
+    }
+  }
+
+  // Set promo code and toggle display visibility
   DOM.modalPromoCode.textContent = offer.promoCode;
+  const hasPromo = offer.promoCode && offer.promoCode.toLowerCase() !== 'none' && offer.promoCode.trim() !== '';
+  const promoDisplay = DOM.termsModal.querySelector('.promo-code-display');
+  const modalFooter = DOM.termsModal.querySelector('.modal-footer');
+  if (promoDisplay && modalFooter) {
+    if (hasPromo) {
+      promoDisplay.style.display = '';
+      modalFooter.style.justifyContent = '';
+    } else {
+      promoDisplay.style.display = 'none';
+      modalFooter.style.justifyContent = 'center';
+    }
+  }
+
   DOM.modalVisitBtn.href = offer.url;
 
   // Open modal animation

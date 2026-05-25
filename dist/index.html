@@ -202,6 +202,10 @@ body {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  align-self: start;
+  position: sticky;
+  top: 24px;
+  max-height: min(100%, calc(100vh - 48px));
 }
 
 
@@ -427,6 +431,32 @@ select:focus {
 }
 
 /* --- Filter Card --- */
+.filters-card {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+}
+
+.filter-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Custom scrollbar for filter content */
+.filter-content::-webkit-scrollbar {
+  width: 4px;
+}
+.filter-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+.filter-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
 .filter-group {
   display: flex;
   flex-direction: column;
@@ -447,6 +477,8 @@ select:focus {
   flex-direction: column;
   gap: 8px;
   padding-right: 4px;
+  max-height: 180px;
+  overflow-y: auto;
 }
 
 /* Scrollbar for lists */
@@ -677,6 +709,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 20px;
 }
 
 .offer-card::before {
@@ -740,19 +773,29 @@ input[type="range"]::-webkit-slider-thumb:hover {
   font-size: 18px;
   font-weight: 700;
   line-height: 1.3;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   flex-grow: 1;
 }
 
 .card-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px 16px;
-  margin-bottom: 20px;
+  gap: 10px 16px;
+  margin-bottom: 16px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--card-border);
-  padding: 12px;
+  padding: 10px 12px;
   border-radius: var(--border-radius-md);
+}
+
+.card-stats-grid.single-stat {
+  grid-template-columns: 1fr;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+.card-stats-grid.single-stat .stat-item {
+  align-items: center;
 }
 
 .stat-item {
@@ -1188,8 +1231,9 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .modal-quick-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   gap: 16px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--card-border);
@@ -1199,13 +1243,16 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .stat-box {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  text-align: center;
 }
 
 .stat-lbl {
+  display: block;
   font-size: 10px;
   text-transform: uppercase;
   color: var(--text-muted);
@@ -1213,6 +1260,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
 }
 
 .stat-val {
+  display: block;
   font-family: var(--font-display);
   font-size: 18px;
   font-weight: 700;
@@ -1544,17 +1592,25 @@ input[type="range"]::-webkit-slider-thumb:hover {
 @media (max-width: 1024px) {
   .sidebar-panel {
     grid-template-columns: 1fr;
+    align-self: auto;
+    position: static;
+    max-height: none;
   }
-  .mobile-filter-toggle {
-    display: flex;
+  .filters-card {
+    max-height: none;
   }
   .filter-content {
     display: none;
     margin-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 20px;
+    max-height: none;
+    overflow-y: visible;
   }
   .filter-content.open {
+    display: flex;
+  }
+  .mobile-filter-toggle {
     display: flex;
   }
   .mobile-filter-toggle.open .chevron-icon {
@@ -1663,10 +1719,12 @@ input[type="range"]::-webkit-slider-thumb:hover {
           </button>
           <div class="filter-content" id="filter-content">
             <div class="filter-group">
-              <label>Operators</label>
-              <div class="checkbox-list" id="operator-checkboxes">
-                <!-- Dynamically populated -->
-              </div>
+              <label for="min-bonus-range">Min Bonus Value: <span id="min-bonus-label">£0</span></label>
+              <input type="range" id="min-bonus-range" min="0" max="50" step="5" value="0">
+            </div>
+            <div class="filter-group">
+              <label for="max-stake-range">Max Qualifying Stake: <span id="max-stake-label">£20</span></label>
+              <input type="range" id="max-stake-range" min="0" max="20" step="1" value="20">
             </div>
             <div class="filter-group">
               <label>Offer Types</label>
@@ -1674,15 +1732,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
                 <!-- Dynamically populated -->
               </div>
             </div>
-          <div class="filter-group">
-            <label for="min-bonus-range">Min Bonus Value: <span id="min-bonus-label">£0</span></label>
-            <input type="range" id="min-bonus-range" min="0" max="50" step="5" value="0">
-          </div>
-          <div class="filter-group">
-            <label for="max-stake-range">Max Qualifying Stake: <span id="max-stake-label">£20</span></label>
-            <input type="range" id="max-stake-range" min="0" max="20" step="1" value="20">
-          </div>
-          <button id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
+            <div class="filter-group">
+              <label>Operators</label>
+              <div class="checkbox-list" id="operator-checkboxes">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+            <button id="reset-filters-btn" class="btn btn-secondary">Reset Filters</button>
           </div>
         </section>
       </aside>
@@ -1883,19 +1939,19 @@ input[type="range"]::-webkit-slider-thumb:hover {
       <div class="modal-body">
         <!-- Quick stats -->
         <div class="modal-quick-stats">
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-bonus-box">
             <span class="stat-lbl">Bonus Value</span>
             <span class="stat-val highlight-green" id="modal-stat-bonus">£30</span>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-stake-box">
             <span class="stat-lbl">Min Stake</span>
             <span class="stat-val" id="modal-stat-stake">£10</span>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-odds-box">
             <span class="stat-lbl">Min Odds</span>
             <span class="stat-val" id="modal-stat-odds">2.0</span>
           </div>
-          <div class="stat-box">
+          <div class="stat-box" id="modal-stat-expiry-box">
             <span class="stat-lbl">Expiry</span>
             <span class="stat-val" id="modal-stat-expiry">7 Days</span>
           </div>
@@ -1968,7 +2024,7 @@ window.PROMO_DATA = {
           "Receive 3 x £10 free bet tokens (£10 Single, £10 Acca, £10 Bet Builder) upon qualifying bet settlement."
         ],
         "terms": "New customers only. 18+. UK only. Minimum deposit £10. Place a £10 accumulator bet with a minimum of 4 legs and total odds of 2.0 or higher. Free bets credited upon settlement. Exclusion list applies. GambleAware.org.",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/midnite/",
         "rating": 4.6
       },
       "historicalOffers": [
@@ -2038,7 +2094,7 @@ window.PROMO_DATA = {
           "Your Bet Credits (£30) will be released shortly after your qualifying bet settles."
         ],
         "terms": "New Customers only. Bet £10 & Get £30 in Free Bets for new customers at bet365. Min deposit requirement. Free Bets are paid as Bet Credits and are available for use upon settlement of qualifying bets. Min odds, bet and payment method exclusions apply. Returns exclude Bet Credits stake. Time limits and T&Cs apply.",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/bet365/",
         "rating": 4.9
       },
       "historicalOffers": [
@@ -2109,7 +2165,7 @@ window.PROMO_DATA = {
           "Get a £20 free bet credited immediately (credited as 1 x £20 token)."
         ],
         "terms": "18+ Eligible UK+IRE players. PayPal & some deposit & bet types excl. Min first £5 bet within 14 days of account reg at min odds 1/2 = 1.5. Gen £20 free bet credited. Free bet valid for 7 days. Free bet stake not returned. T&Cs apply.",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/coral/",
         "rating": 4.3
       },
       "historicalOffers": [
@@ -2181,7 +2237,7 @@ window.PROMO_DATA = {
           "Receive 4 x £5 free bet tokens instantly."
         ],
         "terms": "18+ New UK & ROI customers only. Min deposit £5. Place a first bet of £5 or more at odds of 1/2 (1.5) or larger. 4 x £5 free bets credited upon placing. Free bets valid for 7 days. Free bet stakes not returned. Certain deposit methods excluded. Full T&Cs apply.",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/ladbrokes/",
         "rating": 4.4
       },
       "historicalOffers": [
@@ -2241,7 +2297,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/betfred/",
         "rating": 4.5
       },
       "historicalOffers": [
@@ -2294,7 +2350,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/betvictor/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2340,7 +2396,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/unibet/",
         "rating": 4.3
       },
       "historicalOffers": [
@@ -2386,7 +2442,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/betmgm/",
         "rating": 4.5
       },
       "historicalOffers": [
@@ -2418,7 +2474,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/livescorebet/",
         "rating": 4.4
       },
       "historicalOffers": [
@@ -2520,7 +2576,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/boylesports/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2566,7 +2622,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/virginbet/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2636,7 +2692,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/kwiff/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2682,7 +2738,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/tote/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2714,7 +2770,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://whichbookie.co.uk/bet/betgoodwin/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2746,7 +2802,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/free-bets/",
+        "url": "https://www.whichbookie.co.uk/bet/starsports/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2802,7 +2858,7 @@ window.PROMO_DATA = {
         "depositExclusions": [],
         "steps": [],
         "terms": "",
-        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "url": "https://www.whichbookie.co.uk/bet/skyvegas/",
         "rating": 4.2
       },
       "historicalOffers": [
@@ -2838,7 +2894,7 @@ window.PROMO_DATA = {
           "Free spins will be credited to your account automatically."
         ],
         "terms": "New customers only. 18+. Opt in required. Free spins valid for 7 days. UK and Ireland only. GambleAware.org.",
-        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "url": "https://www.whichbookie.co.uk/bet/paddypowergames/",
         "rating": 4.6
       },
       "historicalOffers": [
@@ -2874,7 +2930,7 @@ window.PROMO_DATA = {
           "Enjoy your wager-free spins on selected games."
         ],
         "terms": "New players only. 18+. Claim within 48 hours. Spins expire in 14 days. Winnings capped. Full T&Cs apply.",
-        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "url": "https://www.whichbookie.co.uk/bet/888casino/",
         "rating": 4.5
       },
       "historicalOffers": [
@@ -2910,7 +2966,7 @@ window.PROMO_DATA = {
           "Spins will be instantly credited to your account."
         ],
         "terms": "New players only. 18+. Mobile verification required. Free spins valid for 7 days. No wagering requirements on winnings.",
-        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "url": "https://whichbookie.co.uk/bet/mrq/",
         "rating": 4.7
       },
       "historicalOffers": [
@@ -2946,7 +3002,7 @@ window.PROMO_DATA = {
           "Launch the designated game to claim your spins."
         ],
         "terms": "New players only. 18+. 40x wagering on winnings. Valid for 30 days. Full terms apply. GambleAware.org.",
-        "url": "https://www.whichbookie.co.uk/casino-bonuses/100-free-spins-no-deposit/",
+        "url": "https://www.whichbookie.co.uk/bet/yeticasino/",
         "rating": 4.4
       },
       "historicalOffers": [
@@ -2982,7 +3038,7 @@ window.PROMO_DATA = {
           "Receive your bingo bonus funds automatically."
         ],
         "terms": "New customers only. 18+. Min deposit £5. Spend £5 on bingo within 7 days. 2x wagering requirement on bingo bonus.",
-        "url": "https://www.whichbookie.co.uk/bingo/",
+        "url": "https://www.whichbookie.co.uk/bet/meccabingobingo/",
         "rating": 4.6
       },
       "historicalOffers": [
@@ -3019,7 +3075,7 @@ window.PROMO_DATA = {
           "Claim your bingo tickets in the lobby."
         ],
         "terms": "New customers only. 18+. Opt in, deposit and play £10 on bingo within 7 days. Tickets worth up to £50. Full terms apply.",
-        "url": "https://www.whichbookie.co.uk/bingo/",
+        "url": "https://www.whichbookie.co.uk/bet/heartbingobingo/",
         "rating": 4.5
       },
       "historicalOffers": [
@@ -3056,7 +3112,7 @@ window.PROMO_DATA = {
           "Receive £30 in wager-free bingo tickets."
         ],
         "terms": "New members only. 18+. Min £10 deposit & play. Winnings paid as cash. 30 days expiry. Full T&Cs apply.",
-        "url": "https://www.whichbookie.co.uk/bingo/",
+        "url": "https://www.whichbookie.co.uk/bet/jackpotjoybingo/",
         "rating": 4.7
       },
       "historicalOffers": [
@@ -3123,7 +3179,7 @@ const state = {
   sortBy: 'rating',
   activeTab: 'offers',
   currentPage: 1,
-  itemsPerPage: 9
+  itemsPerPage: 12
 };
 
 // --- DOM References ---
@@ -3165,6 +3221,8 @@ const DOM = {
   modalStatStake: document.getElementById('modal-stat-stake'),
   modalStatOdds: document.getElementById('modal-stat-odds'),
   modalStatExpiry: document.getElementById('modal-stat-expiry'),
+  modalStatBonusBox: document.getElementById('modal-stat-bonus-box'),
+  modalStatOddsBox: document.getElementById('modal-stat-odds-box'),
   modalStepsList: document.getElementById('modal-steps-list'),
   modalExclusionsList: document.getElementById('modal-exclusions-list'),
   modalTermsText: document.getElementById('modal-terms-text'),
@@ -3450,6 +3508,15 @@ function renderOffers() {
     card.className = 'glass-card offer-card';
     card.style.setProperty('--op-theme', op.themeColor);
     
+    const statsGridHtml = `
+      <div class="card-stats-grid single-stat">
+        <div class="stat-item">
+          <span class="stat-label">Min Stake</span>
+          <span class="stat-value">£${offer.minStake.toFixed(2)}</span>
+        </div>
+      </div>
+    `;
+    
     card.innerHTML = `
       <div class="badge-offer-type">${offer.bonusType}</div>
       <div class="card-top">
@@ -3467,30 +3534,13 @@ function renderOffers() {
       
       <h4 class="offer-title-main">${offer.title}</h4>
       
-      <div class="card-stats-grid">
-        <div class="stat-item">
-          <span class="stat-label">Min Stake</span>
-          <span class="stat-value">£${offer.minStake.toFixed(2)}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Min Odds</span>
-          <span class="stat-value">${formatOdds(offer.minOdds)}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Promo Code</span>
-          <span class="stat-value" style="color: var(--primary)">${offer.promoCode}</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">Expiry</span>
-          <span class="stat-value">${offer.expiryDays} Days</span>
-        </div>
-      </div>
+      ${statsGridHtml}
       
       <div class="card-footer-controls">
         <button class="btn btn-primary btn-details" data-op-id="${op.id}">View Details & T&Cs</button>
-        <button class="btn-icon-only btn-visit" data-url="${offer.url}" title="Visit Operator Website">
+        <a href="${offer.url}" target="_blank" rel="noopener noreferrer" class="btn-icon-only btn-visit" title="Visit Operator Website">
           <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" fill="currentColor"/></svg>
-        </button>
+        </a>
       </div>
     `;
     
@@ -3502,13 +3552,6 @@ function renderOffers() {
     btn.addEventListener('click', (e) => {
       const opId = e.currentTarget.dataset.opId;
       openModal(opId);
-    });
-  });
-
-  DOM.offersContainer.querySelectorAll('.btn-visit').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const url = e.currentTarget.dataset.url;
-      window.open(url, '_blank');
     });
   });
 
@@ -3671,26 +3714,87 @@ function openModal(opId) {
   DOM.modalStatOdds.textContent = formatOdds(offer.minOdds);
   DOM.modalStatExpiry.textContent = `${offer.expiryDays} Days`;
 
+  // Toggle visibility of Bonus and Odds in details modal based on type
+  if (offer.type === 'free-spins-no-deposit') {
+    if (DOM.modalStatBonusBox) DOM.modalStatBonusBox.style.display = 'none';
+    if (DOM.modalStatOddsBox) DOM.modalStatOddsBox.style.display = 'none';
+  } else if (offer.type === 'bingo') {
+    if (DOM.modalStatBonusBox) DOM.modalStatBonusBox.style.display = '';
+    if (DOM.modalStatOddsBox) DOM.modalStatOddsBox.style.display = 'none';
+  } else { // free-bet
+    if (DOM.modalStatBonusBox) DOM.modalStatBonusBox.style.display = '';
+    if (DOM.modalStatOddsBox) DOM.modalStatOddsBox.style.display = '';
+  }
+
   // Build steps list
   DOM.modalStepsList.innerHTML = '';
-  offer.steps.forEach(step => {
-    const li = document.createElement('li');
-    li.innerHTML = step;
-    DOM.modalStepsList.appendChild(li);
-  });
+  const hasSteps = offer.steps && offer.steps.length > 0 && !(offer.steps.length === 1 && (!offer.steps[0] || offer.steps[0].toLowerCase() === 'none' || offer.steps[0].trim() === ''));
+  if (hasSteps) {
+    offer.steps.forEach(step => {
+      const li = document.createElement('li');
+      li.innerHTML = step;
+      DOM.modalStepsList.appendChild(li);
+    });
+  }
+  const claimSection = DOM.modalStepsList.closest('.modal-section');
+  if (claimSection) {
+    claimSection.style.display = hasSteps ? '' : 'none';
+  }
 
   // Build payment exclusions list
   DOM.modalExclusionsList.innerHTML = '';
-  offer.depositExclusions.forEach(ex => {
-    const pill = document.createElement('span');
-    pill.className = 'exclusion-pill';
-    pill.textContent = ex;
-    DOM.modalExclusionsList.appendChild(pill);
-  });
+  const hasExclusions = offer.depositExclusions && offer.depositExclusions.length > 0 && !(offer.depositExclusions.length === 1 && (!offer.depositExclusions[0] || offer.depositExclusions[0].toLowerCase() === 'none' || offer.depositExclusions[0].trim() === ''));
+  if (hasExclusions) {
+    offer.depositExclusions.forEach(ex => {
+      const pill = document.createElement('span');
+      pill.className = 'exclusion-pill';
+      pill.textContent = ex;
+      DOM.modalExclusionsList.appendChild(pill);
+    });
+  }
+  const exclusionsSection = DOM.modalExclusionsList.closest('.modal-section');
+  if (exclusionsSection) {
+    exclusionsSection.style.display = hasExclusions ? '' : 'none';
+  }
 
-  // Set terms detail & link
+  // Set terms detail
   DOM.modalTermsText.textContent = offer.terms;
+  const hasTerms = offer.terms && offer.terms.toLowerCase() !== 'none' && offer.terms.trim() !== '' && !offer.terms.includes('Detailed terms here...');
+  const termsSection = DOM.modalTermsText.closest('.modal-section');
+  if (termsSection) {
+    termsSection.style.display = hasTerms ? '' : 'none';
+  }
+
+  // Adjust columns layout for exclusions and terms grid wrapper
+  const sectionGrid = DOM.termsModal.querySelector('.modal-section-grid');
+  if (sectionGrid) {
+    if (!hasExclusions && !hasTerms) {
+      sectionGrid.style.display = 'none';
+    } else {
+      sectionGrid.style.display = '';
+      if (!hasExclusions || !hasTerms) {
+        sectionGrid.style.gridTemplateColumns = '1fr';
+      } else {
+        sectionGrid.style.gridTemplateColumns = '';
+      }
+    }
+  }
+
+  // Set promo code and toggle display visibility
   DOM.modalPromoCode.textContent = offer.promoCode;
+  const hasPromo = offer.promoCode && offer.promoCode.toLowerCase() !== 'none' && offer.promoCode.trim() !== '';
+  const promoDisplay = DOM.termsModal.querySelector('.promo-code-display');
+  const modalFooter = DOM.termsModal.querySelector('.modal-footer');
+  if (promoDisplay && modalFooter) {
+    if (hasPromo) {
+      promoDisplay.style.display = '';
+      modalFooter.style.justifyContent = '';
+    } else {
+      promoDisplay.style.display = 'none';
+      modalFooter.style.justifyContent = 'center';
+    }
+  }
+
   DOM.modalVisitBtn.href = offer.url;
 
   // Open modal animation
