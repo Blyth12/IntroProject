@@ -6,7 +6,7 @@
       "themeColor": "#00f2fe",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#0d1117\" stroke=\"#00f2fe\" stroke-width=\"3\"/><path d=\"M25 70 V30 L50 55 L75 30 V70\" fill=\"none\" stroke=\"#00f2fe\" stroke-width=\"8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"50\" cy=\"65\" r=\"5\" fill=\"#05d5a1\"/></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £30 in Free Bets",
+        "title": "Bet £10 Get £30",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -66,14 +66,7 @@
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10, Get £30 in Free Bets"
-        },
-        {
-          "year": 2026,
-          "bonusAmount": 30,
-          "minStake": 10,
-          "type": "free-bet",
-          "title": "Bet £10 Get £30 in Free Bets"
+          "title": "Bet £10 Get £30"
         }
       ]
     },
@@ -83,7 +76,7 @@
       "themeColor": "#12ca7e",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"20\" x=\"4\" y=\"4\" fill=\"#12ca7e\"/><text x=\"50\" y=\"58\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"28\" fill=\"#ffffff\" text-anchor=\"middle\">365</text><text x=\"50\" y=\"82\" font-family=\"'Inter', sans-serif\" font-weight=\"600\" font-size=\"12\" fill=\"#0c5a38\" text-anchor=\"middle\">BET</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £30 in Free Bets",
+        "title": "Bet £10 Get £30",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -143,14 +136,7 @@
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10, Get £30 in Free Bets"
-        },
-        {
-          "year": 2026,
-          "bonusAmount": 30,
-          "minStake": 10,
-          "type": "free-bet",
-          "title": "Bet £10 Get £30 in Free Bets"
+          "title": "Bet £10 Get £30"
         }
       ]
     },
@@ -160,7 +146,7 @@
       "themeColor": "#ff7043",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#0d47a1\" stroke=\"#ff7043\" stroke-width=\"3\"/><path d=\"M25 40 Q50 15 75 40 Q50 65 25 40\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"6\"/><path d=\"M25 60 Q50 35 75 60\" fill=\"none\" stroke=\"#ff7043\" stroke-width=\"6\"/></svg>",
       "currentOffer": {
-        "title": "Bet £5 Get £30 in Free Bets",
+        "title": "Bet £5 Get £30",
         "type": "free-bet",
         "minDeposit": 5,
         "minStake": 5,
@@ -218,17 +204,10 @@
         },
         {
           "year": 2026,
-          "bonusAmount": 20,
-          "minStake": 5,
-          "type": "free-bet",
-          "title": "Bet £5, Get £20 in Free Bets"
-        },
-        {
-          "year": 2026,
           "bonusAmount": 30,
           "minStake": 5,
           "type": "free-bet",
-          "title": "Bet £5 Get £30 in Free Bets"
+          "title": "Bet £5 Get £30"
         }
       ]
     },
@@ -238,7 +217,7 @@
       "themeColor": "#ff1744",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#d50000\" stroke=\"#ffffff\" stroke-width=\"3\"/><path d=\"M35 25 V75 H65\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M45 45 H60\" fill=\"none\" stroke=\"#ffffff\" stroke-width=\"6\" stroke-linecap=\"round\"/></svg>",
       "currentOffer": {
-        "title": "Bet £5 Get £30 in Free Bets",
+        "title": "Bet £5 Get £30",
         "type": "free-bet",
         "minDeposit": 5,
         "minStake": 5,
@@ -297,17 +276,10 @@
         },
         {
           "year": 2026,
-          "bonusAmount": 20,
-          "minStake": 5,
-          "type": "free-bet",
-          "title": "Bet £5, Get £20 in Free Bets"
-        },
-        {
-          "year": 2026,
           "bonusAmount": 30,
           "minStake": 5,
           "type": "free-bet",
-          "title": "Bet £5 Get £30 in Free Bets"
+          "title": "Bet £5 Get £30"
         }
       ]
     },
@@ -317,7 +289,7 @@
       "themeColor": "#003366",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#003366\"/><text x=\"50\" y=\"55\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"#ffffff\" text-anchor=\"middle\">BETFRED</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £50 in Free Bets",
+        "title": "Bet £10 Get £50",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -360,7 +332,7 @@
           "bonusAmount": 50,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £50 in Free Bets"
+          "title": "Bet £10 Get £50"
         }
       ]
     },
@@ -370,7 +342,7 @@
       "themeColor": "#0a264a",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#0a264a\"/><text x=\"50\" y=\"55\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"16\" fill=\"#ffffff\" text-anchor=\"middle\">BetVictor</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £30 in Free Bets",
+        "title": "Bet £10 Get £30",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -406,7 +378,7 @@
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £30 in Free Bets"
+          "title": "Bet £10 Get £30"
         }
       ]
     },
@@ -416,7 +388,7 @@
       "themeColor": "#006633",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#006633\" stroke=\"#ffffff\" stroke-width=\"3\"/><text x=\"50\" y=\"55\" font-family=\"'Outfit', sans-serif\" font-weight=\"900\" font-size=\"18\" fill=\"#ffffff\" text-anchor=\"middle\">UNIBET</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £30 in Free Bets",
+        "title": "Bet £10 Get £30",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -452,7 +424,7 @@
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £30 in Free Bets"
+          "title": "Bet £10 Get £30"
         }
       ]
     },
@@ -462,12 +434,12 @@
       "themeColor": "#b29759",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#000000\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"20\" fill=\"#b29759\" text-anchor=\"middle\">BetMGM</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 & Get £40 in Free Bets",
+        "title": "No Live Data Found (Scrape Failed)",
         "type": "free-bet",
         "minDeposit": 10,
-        "minStake": 10,
+        "minStake": 0,
         "minOdds": 1.5,
-        "bonusAmount": 40,
+        "bonusAmount": 0,
         "bonusType": "Free Bets",
         "promoCode": "None",
         "wageringRequirements": "None",
@@ -478,15 +450,7 @@
         "url": "",
         "rating": 4.5
       },
-      "historicalOffers": [
-        {
-          "year": 2026,
-          "bonusAmount": 40,
-          "minStake": 10,
-          "type": "free-bet",
-          "title": "Bet £10 & Get £40 in Free Bets"
-        }
-      ]
+      "historicalOffers": []
     },
     {
       "id": "livescorebet",
@@ -494,7 +458,7 @@
       "themeColor": "#ff4d00",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#ff4d00\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">LiveScore</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £30 in Free Bets",
+        "title": "Bet £10 Get £30",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -530,7 +494,7 @@
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £30 in Free Bets"
+          "title": "Bet £10 Get £30"
         }
       ]
     },
@@ -596,7 +560,7 @@
       "themeColor": "#005baa",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#005baa\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">BoyleSports</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £40 in Free Bets",
+        "title": "Bet £10 Get £40",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -632,7 +596,7 @@
           "bonusAmount": 40,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £40 in Free Bets"
+          "title": "Bet £10 Get £40"
         }
       ]
     },
@@ -642,7 +606,7 @@
       "themeColor": "#d90000",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#d90000\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Virgin Bet</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £30 in Free Bets",
+        "title": "Bet £10 Get £30",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -678,7 +642,7 @@
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £30 in Free Bets"
+          "title": "Bet £10 Get £30"
         }
       ]
     },
@@ -712,7 +676,7 @@
       "themeColor": "#6e00ff",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#6e00ff\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Kwiff</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £40 in Free Bets",
+        "title": "Bet £10 Get £40",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -748,7 +712,7 @@
           "bonusAmount": 40,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £40 in Free Bets"
+          "title": "Bet £10 Get £40"
         }
       ]
     },
@@ -758,7 +722,7 @@
       "themeColor": "#d5001c",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#d5001c\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Tote</text></svg>",
       "currentOffer": {
-        "title": "Bet £10 Get £30 in Free Bets",
+        "title": "Bet £10 Get £30",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 10,
@@ -780,7 +744,7 @@
           "bonusAmount": 30,
           "minStake": 10,
           "type": "free-bet",
-          "title": "Bet £10 Get £30 in Free Bets"
+          "title": "Bet £10 Get £30"
         }
       ]
     },
@@ -814,7 +778,7 @@
       "themeColor": "#1e3a5f",
       "logoSvg": "<svg viewBox=\"0 0 100 100\" class=\"op-logo-svg\"><rect width=\"92\" height=\"92\" rx=\"10\" x=\"4\" y=\"4\" fill=\"#1e3a5f\"/><text x=\"50\" y=\"55\" font-family=\"Outfit, sans-serif\" font-weight=\"900\" font-size=\"14\" fill=\"#ffffff\" text-anchor=\"middle\">Star Sports</text></svg>",
       "currentOffer": {
-        "title": "BET £20 GET £10 IN FREE BETS",
+        "title": "BET £20 GET £10",
         "type": "free-bet",
         "minDeposit": 10,
         "minStake": 20,
@@ -836,7 +800,7 @@
           "bonusAmount": 10,
           "minStake": 20,
           "type": "free-bet",
-          "title": "BET £20 GET £10 IN FREE BETS"
+          "title": "BET £20 GET £10"
         }
       ]
     },

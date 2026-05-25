@@ -3,10 +3,37 @@ const path = require('path');
 const cheerio = require('cheerio');
 const { parseOfferString } = require('./parser');
 
-// Load our static application configuration (using data.js as the template)
-// We use dynamic import for ES modules, but since this is a Node script, let's read the raw file or convert data.js.
-// Since data.js uses ES module syntax ("export const PROMO_DATA = ..."), we can parse it manually or rename to .mjs.
-// For simplicity, we'll import it directly.
+function getCardContainer($, $el) {
+  let current = $el;
+  for (let i = 0; i < 5; i++) {
+    const parent = current.parent();
+    if (!parent || parent.length === 0) break;
+    const className = (parent.attr('class') || '').toLowerCase();
+    const id = (parent.attr('id') || '').toLowerCase();
+    const tagName = parent[0].tagName.toLowerCase();
+    
+    // Stop if parent is a container or page layout element
+    if (className.includes('columns') || className.includes('main') || className.includes('content') || 
+        className.includes('wrapper') || className.includes('grid') || className.includes('list') || 
+        className.includes('layout') || className.includes('body') || className.includes('header') || 
+        className.includes('footer') || className.includes('container') || tagName === 'body' || tagName === 'html') {
+      return current; // Return current which is the child of the container
+    }
+    
+    // Stop if parent is explicitly a card/tip wrapper (and NOT an inner element detail)
+    const isCard = className.includes('freebet') || className.includes('card') || className.includes('row') || 
+                   className.includes('tip') || className.includes('item') || className.includes('offer');
+                   
+    const isInner = ['title', 'text', 'line', 'header', 'icon', 'btn', 'button', 'link', 'terms', 'desc', 'logo', 'badge', 'meta', 'info', 'label'].some(kw => className.includes(kw));
+    
+    if (isCard && !isInner) {
+      return parent;
+    }
+    
+    current = parent;
+  }
+  return current;
+}
 
 async function runScraper() {
   console.log("🚀 Starting live scraping pipeline...");
@@ -37,11 +64,13 @@ async function runScraper() {
     let scrapedOffers = [];
     $('*').each((i, el) => {
       const directText = $(el).clone().children().remove().end().text().replace(/\s+/g, ' ').trim();
-      if (directText.match(/Bet £\d+.*?Get £\d+/i) || directText.match(/Get £\d+.*?Free Bet/i)) {
-        if (directText.length < 150) {
-           // Climb up exactly 3 nodes to capture the individual operator's card wrapper
-           const contextText = $(el).parent().parent().parent().text().replace(/\s+/g, ' ').toLowerCase();
-           scrapedOffers.push({ offerText: directText, contextText: contextText });
+      const match = directText.match(/Bet\s*£?(\d+(?:\.\d+)?)\s*(?:and)?\s*Get\s*£?(\d+(?:\.\d+)?)/i) || 
+                    directText.match(/Get\s*£?(\d+(?:\.\d+)?)\s*Free\s*Bet/i);
+      if (match) {
+        if (directText.length < 350) {
+           const card = getCardContainer($, $(el));
+           const contextText = card.text().replace(/\s+/g, ' ').toLowerCase();
+           scrapedOffers.push({ offerText: match[0], contextText: contextText });
         }
       }
     });
@@ -65,14 +94,22 @@ async function runScraper() {
         op.currentOffer.bonusAmount = parsed.bonus;
         op.currentOffer.minStake = parsed.stake;
         
-        // Push the new live data to the historical archive
-        op.historicalOffers.push({
-          year: new Date().getFullYear(),
+        // Push or update current year live data in historicalOffers
+        const currentYear = new Date().getFullYear();
+        const existingIndex = op.historicalOffers.findIndex(h => h.year === currentYear);
+        const offerObj = {
+          year: currentYear,
           bonusAmount: parsed.bonus,
           minStake: parsed.stake,
           type: "free-bet",
           title: parsed.title
-        });
+        };
+        
+        if (existingIndex !== -1) {
+          op.historicalOffers[existingIndex] = offerObj;
+        } else {
+          op.historicalOffers.push(offerObj);
+        }
       }
     });
 

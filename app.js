@@ -1,7 +1,6 @@
 import { PROMO_DATA } from './data.js';
 
-// Dynamically hide any operators that failed the daily scrape
-PROMO_DATA.operators = PROMO_DATA.operators.filter(op => op.currentOffer.bonusAmount > 0 && !op.currentOffer.title.includes("No Live Data Found"));
+// (Active operator filtering is decoupled and applied locally in UI/Calculator views to preserve historical database in memory)
 // --- Application State ---
 const state = {
   searchQuery: '',
@@ -76,7 +75,10 @@ function init() {
 function populateFilters() {
   DOM.operatorCheckboxesContainer.innerHTML = '';
   
-  PROMO_DATA.operators.forEach(op => {
+  // Only display filter checkboxes for active/scraped operators
+  const activeOps = PROMO_DATA.operators.filter(op => op.currentOffer.bonusAmount > 0 && !op.currentOffer.title.includes("No Live Data Found"));
+  
+  activeOps.forEach(op => {
     const label = document.createElement('label');
     label.className = 'checkbox-item';
     
@@ -217,8 +219,10 @@ function setupEventListeners() {
 function renderOffers() {
   DOM.offersContainer.innerHTML = '';
   
-  // Filter operators
-  let filtered = PROMO_DATA.operators.filter(op => {
+  // Filter active operators
+  const activeOps = PROMO_DATA.operators.filter(op => op.currentOffer.bonusAmount > 0 && !op.currentOffer.title.includes("No Live Data Found"));
+  
+  let filtered = activeOps.filter(op => {
     const offer = op.currentOffer;
     
     // Operator selection filter
@@ -413,9 +417,11 @@ function calculateBudgetPotential() {
   const budget = parseFloat(DOM.budgetInput.value) || 0;
   const targetOdds = parseFloat(DOM.calcOddsSelect.value) || 1.5;
   
-  // Find all operators whose welcome offer stake requirement is <= budget
+  // Find all active operators whose welcome offer stake requirement is <= budget
   // and whose qualifying odds requirement is <= target qualifying odds.
-  let eligibleOperators = PROMO_DATA.operators.filter(op => {
+  const activeOps = PROMO_DATA.operators.filter(op => op.currentOffer.bonusAmount > 0 && !op.currentOffer.title.includes("No Live Data Found"));
+  
+  let eligibleOperators = activeOps.filter(op => {
     const offer = op.currentOffer;
     return offer.minStake <= budget && offer.minOdds <= targetOdds;
   });
@@ -566,7 +572,7 @@ function formatOdds(odds) {
   if (odds === 1.5) return '1/2 (1.5)';
   if (odds === 2.0) return '1/1 (2.0)';
   if (odds === 3.0) return '2/1 (3.0)';
-  return `odds ${odds}`;
+  return `${odds}`;
 }
 
 // --- Initialize App Execution ---

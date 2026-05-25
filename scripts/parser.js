@@ -16,6 +16,19 @@ function parseOfferString(offerStr) {
   if (match) {
     stake = parseFloat(match[1]);
     bonus = parseFloat(match[2]);
+  } else {
+    // Fallback: match "Get £[Bonus]" or "Get up to £[Bonus]"
+    const bonusMatch = offerStr.match(/Get\s*(?:up\s*to\s*)?£?(\d+(?:\.\d+)?)/i);
+    if (bonusMatch) {
+      bonus = parseFloat(bonusMatch[1]);
+      // Check if stake is mentioned separately (e.g. "when you bet £5")
+      const stakeMatch = offerStr.match(/bet\s*£?(\d+(?:\.\d+)?)/i);
+      if (stakeMatch) {
+        stake = parseFloat(stakeMatch[1]);
+      } else {
+        stake = 0; // Default to 0 stake (any-value bet or no-deposit)
+      }
+    }
   }
 
   return { stake, bonus, title: offerStr };
